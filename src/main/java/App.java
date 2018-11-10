@@ -1,3 +1,5 @@
+import model.DataLoader;
+
 public class App {
     public static void main(String[] args) {
 //        String csvFile = "../aapl_us_d.csv";
