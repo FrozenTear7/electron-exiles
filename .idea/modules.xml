@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/electron-exiles.iml" filepath="$PROJECT_DIR$/.idea/modules/electron-exiles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/electron-exiles_main.iml" filepath="$PROJECT_DIR$/.idea/modules/electron-exiles_main.iml" group="electron-exiles" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/electron-exiles_test.iml" filepath="$PROJECT_DIR$/.idea/modules/electron-exiles_test.iml" group="electron-exiles" />
+    </modules>
+  </component>
+</project>
