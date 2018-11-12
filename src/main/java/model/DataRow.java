@@ -7,9 +7,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class DataRow {
     private String date;
-    private float open;
-    private float high;
-    private float low;
-    private float close;
-    private int volume;
+    private String open;
+    private String high;
+    private String low;
+    private String close;
+    private String volume;
 }

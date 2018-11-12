@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:controller="controller.TableViewController" xmlns:fx="http://javafx.com/fxml/1">
+    <TableView fx:id="dataRowTableView">
+        <columns>
+            <TableColumn fx:id="dateCol" text="Date" />
+            <TableColumn fx:id="openCol" text="Open" />
+            <TableColumn fx:id="highCol" text="High" />
+            <TableColumn fx:id="lowCol" text="Low" />
+            <TableColumn fx:id="closeCol" text="Close" />
+            <TableColumn fx:id="volumeCol" text="Volume" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+</StackPane>

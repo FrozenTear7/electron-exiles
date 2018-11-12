@@ -14,7 +14,7 @@ public class DataLoader {
         this.csvFile = csvFile;
     }
 
-    public List<DataRow> readData() {
+    public List<DataRow> getStockData() {
         List<DataRow> dataRowList = new ArrayList<>();
         String line;
 
@@ -26,9 +26,8 @@ public class DataLoader {
                     String[] parsedLine = line.split(",");
 
                     if (parsedLine.length == 6)
-                        dataRowList.add(new DataRow(parsedLine[0], Float.valueOf(parsedLine[1]),
-                                Float.valueOf(parsedLine[2]), Float.valueOf(parsedLine[3]), Float.valueOf(parsedLine[4]),
-                                Integer.valueOf(parsedLine[5])));
+                        dataRowList.add(new DataRow(parsedLine[0], parsedLine[1], parsedLine[2], parsedLine[3],
+                                parsedLine[4], parsedLine[5]));
                 }
             }
         } catch (IOException e) {

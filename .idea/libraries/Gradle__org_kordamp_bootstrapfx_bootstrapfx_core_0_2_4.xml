@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.kordamp.bootstrapfx:bootstrapfx-core:0.2.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kordamp.bootstrapfx/bootstrapfx-core/0.2.4/1f85b5ecc864933427e48644703f7d0be5cc66ca/bootstrapfx-core-0.2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kordamp.bootstrapfx/bootstrapfx-core/0.2.4/a5e48e9c6fadf09c629e4b3b4bbe5ce166eb1456/bootstrapfx-core-0.2.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

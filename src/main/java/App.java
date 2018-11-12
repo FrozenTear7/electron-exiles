@@ -1,4 +1,6 @@
-import controller.MainPanelController;
+import controller.FileLoaderController;
+import controller.LineChartController;
+import controller.TableViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,14 +21,23 @@ public class App extends Application {
 
         try {
             BorderPane root = new BorderPane();
-            FXMLLoader listLoader = new FXMLLoader(getClass().getResource("/MainPanel.fxml"));
-            root.setCenter(listLoader.load());
-            MainPanelController mainPanelController = listLoader.getController();
+
+            FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/FileLoader.fxml"));
+            root.setTop(fileLoader.load());
+            FileLoaderController fileLoaderController = fileLoader.getController();
+
+            FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/TableView.fxml"));
+            root.setCenter(tableViewLoader.load());
+            TableViewController tableViewController = tableViewLoader.getController();
+
+            FXMLLoader lineChartLoader = new FXMLLoader(getClass().getResource("/LineChart.fxml"));
+            root.setRight(lineChartLoader.load());
+            LineChartController lineChartController = lineChartLoader.getController();
 
             DataLoader dataLoader = new DataLoader(csvFile);
-            mainPanelController.initModel(dataLoader.readData());
+            tableViewController.setData(dataLoader.getStockData());
 
-            Scene scene = new Scene(root, 800, 600);
+            Scene scene = new Scene(root, 1920, 1080);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
