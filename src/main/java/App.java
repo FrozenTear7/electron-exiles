@@ -4,15 +4,15 @@ import controller.TableViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.DataLoader;
+
 import java.io.IOException;
-import javafx.scene.image.Image;
 
 public class App extends Application {
-    private String csvFile = "D:/Download/aapl_us_d.csv";
-//    private String csvFile = "/resources/aapl_us_d.csv";
+    private String csvFile = Utils.getResourcesPath() + "aapl_us_d.csv";
 
     @Override
     public void start(Stage primaryStage) {
