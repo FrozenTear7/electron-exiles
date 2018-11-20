@@ -10,3 +10,5 @@ TODO
 - Wojciech Klemens
 - Konrad Grela
 - Paweł Mendroch
+
+<img src="https://ninfora.com/forums/uploads/monthly_2016_12/maxresdefault.jpg.6726da6b26a92e9e10764a43bac729d4.jpg">
