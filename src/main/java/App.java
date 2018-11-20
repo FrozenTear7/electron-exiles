@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Electron Exiles");
@@ -32,7 +33,7 @@ public class App extends Application {
             root.setRight(lineChartLoader.load());
             LineChartController lineChartController = lineChartLoader.getController();
 
-            Scene scene = new Scene(root,1200, 800);
+            Scene scene = new Scene(root, 1200, 800);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

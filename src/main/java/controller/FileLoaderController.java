@@ -22,6 +22,7 @@ public class FileLoaderController {
 
     @FXML
     private void initialize() {
+
         button1.setOnAction(event -> {
             FileChooser fc = new FileChooser();
             fc.setInitialDirectory(new File(Paths.get("").toAbsolutePath().toString()));
