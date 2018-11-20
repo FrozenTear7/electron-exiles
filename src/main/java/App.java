@@ -7,12 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.DataLoader;
 
 import java.io.IOException;
 
 public class App extends Application {
-    private String csvFile = Utils.getResourcesPath() + "aapl_us_d.csv";
 
     @Override
     public void start(Stage primaryStage) {
@@ -22,22 +20,20 @@ public class App extends Application {
         try {
             BorderPane root = new BorderPane();
 
-            FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/FileLoader.fxml"));
-            root.setTop(fileLoader.load());
-            FileLoaderController fileLoaderController = fileLoader.getController();
-
-            FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/TableView.fxml"));
+            FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/fxmls/TableView.fxml"));
             root.setCenter(tableViewLoader.load());
             TableViewController tableViewController = tableViewLoader.getController();
 
-            FXMLLoader lineChartLoader = new FXMLLoader(getClass().getResource("/LineChart.fxml"));
+            FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxmls/FileLoader.fxml"));
+            root.setTop(fileLoader.load());
+            FileLoaderController fileLoaderController = fileLoader.getController();
+            fileLoaderController.setTableViewController(tableViewController);
+
+            FXMLLoader lineChartLoader = new FXMLLoader(getClass().getResource("/fxmls/LineChart.fxml"));
             root.setRight(lineChartLoader.load());
             LineChartController lineChartController = lineChartLoader.getController();
 
-            DataLoader dataLoader = new DataLoader(csvFile);
-            tableViewController.setData(dataLoader.getStockData());
-
-            Scene scene = new Scene(root, 1920, 1080);
+            Scene scene = new Scene(root, 1200, 800);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
