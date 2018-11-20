@@ -1,4 +1,4 @@
-import controller.TableViewController;
+import controller.FileLoaderController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -11,28 +11,28 @@ import org.testfx.matcher.base.NodeMatchers;
 import static org.testfx.api.FxAssert.verifyThat;
 
 @ExtendWith(ApplicationExtension.class)
-class TableViewControllerTest extends CommonControllerTest {
+class FileLoaderControllerTest extends CommonControllerTest {
 
-    TableViewController tableViewController;
+    private FileLoaderController fileLoaderController;
 
     @Start
     void onStart(Stage stage) throws Exception {
         BorderPane root = new BorderPane();
 
-        FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/fxmls/TableView.fxml"));
-        root.setCenter(tableViewLoader.load());
-        tableViewController = tableViewLoader.getController();
+        FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxmls/FileLoader.fxml"));
+        root.setTop(fileLoader.load());
+        fileLoaderController = fileLoader.getController();
     }
 
     @Test
-    void should_render_table() {
+    void should_render_button() {
         // expect:
-        verifyThat("#dataRowTableView", NodeMatchers.isNotNull());
+        verifyThat("#button1", NodeMatchers.isNotNull());
     }
 
     @Test
-    void should_have_label() {
+    void should_render_list_view() {
         // expect:
-        verifyThat("#label1", NodeMatchers.isNotNull());
+        verifyThat("#listView1", NodeMatchers.isNotNull());
     }
 }
