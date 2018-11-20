@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.LineChartController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.LineChartController" prefHeight="200.0" prefWidth="300.0">
+    <LineChart fx:id="lineChart1">
+        <xAxis><CategoryAxis fx:id="xAxis"/></xAxis>
+        <yAxis><NumberAxis fx:id="yAxis"/></yAxis>
+    </LineChart>
 </AnchorPane>

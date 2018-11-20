@@ -42,7 +42,6 @@ public class App extends Application {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Lulus-pylus!!!");
         }
     }
 
