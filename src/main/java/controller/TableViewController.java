@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,6 +40,9 @@ public class TableViewController {
     private TableColumn<DataRow, String> volumeCol;
 
     @FXML
+    private Label label1;
+
+    @FXML
     private void initialize() {
         dataRowTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -51,11 +55,15 @@ public class TableViewController {
     }
 
     public void setData(List<DataRow> dataRowList) {
-        if (this.dataRowList != null) {
-            throw new IllegalStateException("Model can only be initialized once");
-        }
+//        if (this.dataRowList != null) {
+//            throw new IllegalStateException("Model can only be initialized once");
+//        }
         this.dataRowList = dataRowList;
 
         dataRowTableView.setItems(FXCollections.observableArrayList(dataRowList));
+    }
+
+    public void setLabel1Text(String text){
+        label1.setText(text);
     }
 }

@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<StackPane fx:controller="controller.TableViewController" xmlns:fx="http://javafx.com/fxml/1">
-    <TableView fx:id="dataRowTableView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TableViewController">
+    <TableView fx:id="dataRowTableView" layoutX="14.0" layoutY="40.0" prefHeight="346.0" prefWidth="573.0">
+        <placeholder>
+            <Label text="Select file to view its content" />
+        </placeholder>
         <columns>
             <TableColumn fx:id="dateCol" text="Date" />
             <TableColumn fx:id="openCol" text="Open" />
-            <TableColumn fx:id="highCol" text="High" />
-            <TableColumn fx:id="lowCol" text="Low" />
+            <TableColumn fx:id="highCol" prefWidth="82.0" text="High" />
+            <TableColumn fx:id="lowCol" prefWidth="81.0" text="Low" />
             <TableColumn fx:id="closeCol" text="Close" />
             <TableColumn fx:id="volumeCol" text="Volume" />
         </columns>
@@ -17,4 +22,5 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
-</StackPane>
+   <Label fx:id="label1" layoutX="14.0" layoutY="14.0" />
+</AnchorPane>
