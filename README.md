@@ -17,7 +17,7 @@
 - Testy jednostkowe funkcji kontrolerów
 
 ##### TODO
-- Stworzenie strategii na podstawie
+- Stworzenie strategii na podstawie danych akcji
 - Ulepszenie wyglądu GUI
 - Przygotowanie większej ilości plików przykładowych
 - Ustanowienie standardu danych .csv
