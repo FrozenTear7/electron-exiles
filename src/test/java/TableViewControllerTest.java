@@ -14,13 +14,14 @@ import static org.testfx.api.FxAssert.verifyThat;
 class TableViewControllerTest extends CommonControllerTest {
 
     TableViewController tableViewController;
+    BorderPane root;
 
     @Start
     void onStart(Stage stage) throws Exception {
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
 
         FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/fxmls/TableView.fxml"));
-        root.setCenter(tableViewLoader.load());
+        root.setRight(tableViewLoader.load());
         tableViewController = tableViewLoader.getController();
     }
 

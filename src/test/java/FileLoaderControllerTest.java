@@ -21,7 +21,7 @@ class FileLoaderControllerTest extends CommonControllerTest {
         root = new BorderPane();
 
         FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxmls/FileLoader.fxml"));
-        root.setTop(fileLoader.load());
+        root.setLeft(fileLoader.load());
         fileLoaderController = fileLoader.getController();
     }
 
