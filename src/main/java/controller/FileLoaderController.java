@@ -52,6 +52,7 @@ public class FileLoaderController {
                 List<DataRow> data = dl.getStockData();
                 tableViewController.setData(data);
                 tableViewController.setLabel1Text("File opened: " + filePath);
+                lineChartController.setData(data);
 
                 ObservableList listView1Items = listView1.getItems();
 
