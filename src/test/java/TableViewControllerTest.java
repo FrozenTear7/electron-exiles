@@ -14,25 +14,34 @@ import static org.testfx.api.FxAssert.verifyThat;
 class TableViewControllerTest extends CommonControllerTest {
 
     TableViewController tableViewController;
+    BorderPane root;
 
     @Start
     void onStart(Stage stage) throws Exception {
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
 
         FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/fxmls/TableView.fxml"));
-        root.setCenter(tableViewLoader.load());
+        root.setRight(tableViewLoader.load());
         tableViewController = tableViewLoader.getController();
     }
 
     @Test
     void should_render_table() {
-        // expect:
         verifyThat("#dataRowTableView", NodeMatchers.isNotNull());
     }
 
     @Test
     void should_have_label() {
-        // expect:
         verifyThat("#label1", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    void should_have_6_specific_columns() {
+        verifyThat("#dateCol", NodeMatchers.isNotNull());
+        verifyThat("#openCol", NodeMatchers.isNotNull());
+        verifyThat("#highCol", NodeMatchers.isNotNull());
+        verifyThat("#lowCol", NodeMatchers.isNotNull());
+        verifyThat("#closeCol", NodeMatchers.isNotNull());
+        verifyThat("#volumeCol", NodeMatchers.isNotNull());
     }
 }

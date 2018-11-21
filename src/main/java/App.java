@@ -21,17 +21,18 @@ public class App extends Application {
             BorderPane root = new BorderPane();
 
             FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/fxmls/TableView.fxml"));
-            root.setCenter(tableViewLoader.load());
+            root.setRight(tableViewLoader.load());
             TableViewController tableViewController = tableViewLoader.getController();
 
+            FXMLLoader lineChartLoader = new FXMLLoader(getClass().getResource("/fxmls/LineChart.fxml"));
+            root.setBottom(lineChartLoader.load());
+            LineChartController lineChartController = lineChartLoader.getController();
+
             FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxmls/FileLoader.fxml"));
-            root.setTop(fileLoader.load());
+            root.setLeft(fileLoader.load());
             FileLoaderController fileLoaderController = fileLoader.getController();
             fileLoaderController.setTableViewController(tableViewController);
-
-            FXMLLoader lineChartLoader = new FXMLLoader(getClass().getResource("/fxmls/LineChart.fxml"));
-            root.setRight(lineChartLoader.load());
-            LineChartController lineChartController = lineChartLoader.getController();
+            fileLoaderController.setLineChartController(lineChartController);
 
             Scene scene = new Scene(root, 1200, 800);
             primaryStage.setScene(scene);

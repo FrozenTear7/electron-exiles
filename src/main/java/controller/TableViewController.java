@@ -50,12 +50,9 @@ public class TableViewController {
         volumeCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getVolume()));
     }
 
-    public void setData(List<DataRow> dataRowList) {
+    public void setDataAndLabel(List<DataRow> dataRowList, String filePath) {
         this.dataRowList = dataRowList;
         dataRowTableView.setItems(FXCollections.observableArrayList(dataRowList));
-    }
-
-    public void setLabel1Text(String text){
-        label1.setText(text);
+        label1.setText("File opened: " + filePath);
     }
 }

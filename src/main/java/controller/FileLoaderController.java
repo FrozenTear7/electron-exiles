@@ -2,7 +2,8 @@ package controller;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import model.DataLoader;
 import model.DataRow;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class FileLoaderController {
     private TableViewController tableViewController;
+    private LineChartController lineChartController;
 
     @FXML
     private Button button1;
@@ -22,7 +24,19 @@ public class FileLoaderController {
 
     @FXML
     private void initialize() {
+        handleButtonClick();
+        handleHistoryClick();
+    }
 
+    public void setTableViewController(TableViewController tableViewController) {
+        this.tableViewController = tableViewController;
+    }
+
+    public void setLineChartController(LineChartController lineChartController) {
+        this.lineChartController = lineChartController;
+    }
+
+    private void handleButtonClick() {
         button1.setOnAction(event -> {
             FileChooser fc = new FileChooser();
             fc.setInitialDirectory(new File(Paths.get("").toAbsolutePath().toString()));
@@ -32,33 +46,29 @@ public class FileLoaderController {
 
             File file = fc.showOpenDialog(null);
 
-            if (file != null){
+            if (file != null) {
                 String filePath = file.getAbsolutePath();
                 DataLoader dl = new DataLoader(filePath);
                 List<DataRow> data = dl.getStockData();
-                tableViewController.setData(data);
-                tableViewController.setLabel1Text("File opened: " + filePath);
+                tableViewController.setDataAndLabel(data, filePath);
+                lineChartController.setData(data);
 
                 ObservableList listView1Items = listView1.getItems();
 
                 if (!listView1Items.contains(filePath)) listView1Items.add(filePath);
             }
         });
+    }
 
+    private void handleHistoryClick() {
         listView1.setOnMouseClicked(event -> {
-            if (listView1.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2){
+            if (listView1.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
                 String filePath = (String) listView1.getSelectionModel().getSelectedItem();
                 DataLoader dl = new DataLoader(filePath);
                 List<DataRow> data = dl.getStockData();
-                tableViewController.setData(data);
-                tableViewController.setLabel1Text("File opened: " + filePath);
+                tableViewController.setDataAndLabel(data, filePath);
+                lineChartController.setData(data);
             }
         });
-
     }
-
-    public void setTableViewController(TableViewController tableViewController){
-        this.tableViewController = tableViewController;
-    }
-
 }

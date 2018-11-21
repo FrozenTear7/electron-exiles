@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>App</OriginalElement>
+  <nodes>
+    <node x="893.2966666666666" y="805.0">App</node>
+    <node x="0.0" y="451.0">controller.LineChartController</node>
+    <node x="736.0" y="462.0">controller.TableViewController</node>
+    <node x="588.8297619047619" y="0.0">model.DataRow</node>
+    <node x="459.0" y="473.0">model.DataLoader</node>
+    <node x="973.18" y="661.0">javafx.application</node>
+    <node x="359.69142857142856" y="606.0">controller.FileLoaderController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="App" target="controller.TableViewController">
+      <point x="0.0" y="-36.5" />
+      <point x="985.2966666666666" y="765.0" />
+      <point x="942.68" y="765.0" />
+      <point x="942.68" y="586.0" />
+      <point x="1026.8333333333333" y="586.0" />
+      <point x="116.33333333333326" y="36.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="controller.LineChartController">
+      <point x="-159.85714285714295" y="-69.5" />
+      <point x="386.3342857142856" y="576.0" />
+      <point x="219.0" y="576.0" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="controller.TableViewController" target="model.DataRow">
+      <point x="0.0" y="-36.5" />
+      <point x="910.5" y="421.0" />
+      <point x="767.1869047619047" y="421.0" />
+      <point x="64.85714285714278" y="190.5" />
+    </edge>
+    <edge source="controller.LineChartController" target="model.DataRow">
+      <point x="0.0" y="-47.5" />
+      <point x="219.0" y="401.0" />
+      <point x="605.0440476190475" y="401.0" />
+      <point x="-97.28571428571433" y="190.5" />
+    </edge>
+    <edge source="App" target="controller.LineChartController">
+      <point x="-73.60000000000002" y="-36.5" />
+      <point x="911.6966666666666" y="785.0" />
+      <point x="222.56642857142856" y="785.0" />
+      <point x="222.56642857142856" y="586.0" />
+      <point x="73.0" y="586.0" />
+      <point x="-146.0" y="47.5" />
+    </edge>
+    <edge source="model.DataLoader" target="model.DataRow">
+      <point x="-64.25" y="-25.5" />
+      <point x="523.25" y="421.0" />
+      <point x="669.9011904761904" y="421.0" />
+      <point x="-32.428571428571445" y="190.5" />
+    </edge>
+    <edge source="App" target="javafx.application">
+      <point x="36.799999999999955" y="-36.5" />
+      <point x="1022.0966666666666" y="785.0" />
+      <point x="1050.1799999999998" y="785.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="controller.TableViewController">
+      <point x="106.57142857142856" y="-69.5" />
+      <point x="652.7628571428571" y="576.0" />
+      <point x="794.1666666666666" y="576.0" />
+      <point x="-116.33333333333337" y="36.5" />
+    </edge>
+    <edge source="javafx.application" target="javafx.application">
+      <point x="-51.333333333333314" y="14.5" />
+      <point x="998.8466666666666" y="710.0" />
+      <point x="953.18" y="710.0" />
+      <point x="953.18" y="675.5" />
+      <point x="-77.0" y="-0.0" />
+    </edge>
+    <edge source="App" target="controller.FileLoaderController">
+      <point x="-36.799999999999955" y="-36.5" />
+      <point x="948.4966666666667" y="775.0" />
+      <point x="546.1914285714286" y="775.0" />
+      <point x="0.0" y="69.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="model.DataRow">
+      <point x="-53.285714285714334" y="-69.5" />
+      <point x="492.9057142857142" y="586.0" />
+      <point x="448.5" y="586.0" />
+      <point x="448.5" y="411.0" />
+      <point x="637.472619047619" y="411.0" />
+      <point x="-64.85714285714289" y="190.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="model.DataLoader">
+      <point x="0.0" y="-69.5" />
+      <point x="546.1914285714286" y="586.0" />
+      <point x="523.25" y="586.0" />
+      <point x="-64.25" y="25.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6469912945415658" x="548.0" y="629.9314651489257" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
