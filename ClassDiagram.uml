@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="331.75" y="795.0">App</node>
+    <node x="339.8558201058201" y="-80.0">model.DataRow</node>
+    <node x="250.25" y="606.0">controller.FileLoaderController</node>
+    <node x="0.0" y="441.0">controller.TableViewController</node>
+    <node x="243.0" y="463.0">model.DataLoader</node>
+    <node x="495.0" y="441.0">controller.LineChartController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="App" target="controller.TableViewController">
+      <point x="-56.33333333333337" y="-36.5" />
+      <point x="359.91666666666663" y="770.0" />
+      <point x="118.09589947089944" y="770.0" />
+      <point x="118.09589947089944" y="586.0" />
+      <point x="37.166666666666686" y="586.0" />
+      <point x="-74.33333333333331" y="47.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="controller.LineChartController">
+      <point x="142.28571428571422" y="-69.5" />
+      <point x="558.5357142857142" y="586.0" />
+      <point x="690.0" y="586.0" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="controller.TableViewController" target="model.DataRow">
+      <point x="-74.33333333333331" y="-47.5" />
+      <point x="37.166666666666686" y="401.0" />
+      <point x="231.57010582010582" y="401.0" />
+      <point x="-88.28571428571428" y="190.5" />
+    </edge>
+    <edge source="controller.LineChartController" target="model.DataRow">
+      <point x="0.0" y="-47.5" />
+      <point x="690.0" y="401.0" />
+      <point x="408.1415343915344" y="401.0" />
+      <point x="88.28571428571428" y="190.5" />
+    </edge>
+    <edge source="App" target="controller.LineChartController">
+      <point x="56.333333333333314" y="-36.5" />
+      <point x="472.5833333333333" y="770.0" />
+      <point x="730.343253968254" y="770.0" />
+      <point x="730.343253968254" y="586.0" />
+      <point x="820.0" y="586.0" />
+      <point x="130.0" y="47.5" />
+    </edge>
+    <edge source="model.DataLoader" target="model.DataRow">
+      <point x="-57.75" y="-25.5" />
+      <point x="300.75" y="421.0" />
+      <point x="319.8558201058201" y="421.0" />
+      <point x="0.0" y="190.5" />
+    </edge>
+    <edge source="App" target="controller.FileLoaderController">
+      <point x="0.0" y="-36.5" />
+      <point x="0.0" y="69.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="controller.TableViewController">
+      <point x="-142.28571428571428" y="-69.5" />
+      <point x="273.9642857142857" y="576.0" />
+      <point x="111.5" y="576.0" />
+      <point x="-1.4210854715202004E-14" y="47.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="model.DataRow">
+      <point x="47.428571428571445" y="-69.5" />
+      <point x="463.67857142857144" y="586.0" />
+      <point x="484.5" y="586.0" />
+      <point x="484.5" y="411.0" />
+      <point x="378.71296296296293" y="411.0" />
+      <point x="58.85714285714283" y="190.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="model.DataLoader">
+      <point x="-47.42857142857139" y="-69.5" />
+      <point x="368.8214285714286" y="556.0" />
+      <point x="300.75" y="556.0" />
+      <point x="-57.75" y="25.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="329.0" y="319.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
