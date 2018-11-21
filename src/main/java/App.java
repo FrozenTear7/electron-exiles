@@ -21,15 +21,15 @@ public class App extends Application {
             BorderPane root = new BorderPane();
 
             FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/fxmls/TableView.fxml"));
-            root.setCenter(tableViewLoader.load());
+            root.setRight(tableViewLoader.load());
             TableViewController tableViewController = tableViewLoader.getController();
 
             FXMLLoader lineChartLoader = new FXMLLoader(getClass().getResource("/fxmls/LineChart.fxml"));
-            root.setRight(lineChartLoader.load());
+            root.setBottom(lineChartLoader.load());
             LineChartController lineChartController = lineChartLoader.getController();
 
             FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxmls/FileLoader.fxml"));
-            root.setTop(fileLoader.load());
+            root.setLeft(fileLoader.load());
             FileLoaderController fileLoaderController = fileLoader.getController();
             fileLoaderController.setTableViewController(tableViewController);
             fileLoaderController.setLineChartController(lineChartController);
