@@ -50,8 +50,7 @@ public class FileLoaderController {
                 String filePath = file.getAbsolutePath();
                 DataLoader dl = new DataLoader(filePath);
                 List<DataRow> data = dl.getStockData();
-                tableViewController.setData(data);
-                tableViewController.setLabel1Text("File opened: " + filePath);
+                tableViewController.setDataAndLabel(data, filePath);
                 lineChartController.setData(data);
 
                 ObservableList listView1Items = listView1.getItems();
@@ -67,8 +66,7 @@ public class FileLoaderController {
                 String filePath = (String) listView1.getSelectionModel().getSelectedItem();
                 DataLoader dl = new DataLoader(filePath);
                 List<DataRow> data = dl.getStockData();
-                tableViewController.setData(data);
-                tableViewController.setLabel1Text("File opened: " + filePath);
+                tableViewController.setDataAndLabel(data, filePath);
                 lineChartController.setData(data);
             }
         });
