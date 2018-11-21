@@ -14,10 +14,11 @@ import static org.testfx.api.FxAssert.verifyThat;
 class FileLoaderControllerTest extends CommonControllerTest {
 
     private FileLoaderController fileLoaderController;
+    private BorderPane root;
 
     @Start
     void onStart(Stage stage) throws Exception {
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
 
         FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxmls/FileLoader.fxml"));
         root.setTop(fileLoader.load());
@@ -26,13 +27,11 @@ class FileLoaderControllerTest extends CommonControllerTest {
 
     @Test
     void should_render_button() {
-        // expect:
         verifyThat("#button1", NodeMatchers.isNotNull());
     }
 
     @Test
     void should_render_list_view() {
-        // expect:
         verifyThat("#listView1", NodeMatchers.isNotNull());
     }
 }

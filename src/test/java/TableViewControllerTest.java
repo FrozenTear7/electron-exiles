@@ -26,13 +26,21 @@ class TableViewControllerTest extends CommonControllerTest {
 
     @Test
     void should_render_table() {
-        // expect:
         verifyThat("#dataRowTableView", NodeMatchers.isNotNull());
     }
 
     @Test
     void should_have_label() {
-        // expect:
         verifyThat("#label1", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    void should_have_6_specific_columns() {
+        verifyThat("#dateCol", NodeMatchers.isNotNull());
+        verifyThat("#openCol", NodeMatchers.isNotNull());
+        verifyThat("#highCol", NodeMatchers.isNotNull());
+        verifyThat("#lowCol", NodeMatchers.isNotNull());
+        verifyThat("#closeCol", NodeMatchers.isNotNull());
+        verifyThat("#volumeCol", NodeMatchers.isNotNull());
     }
 }
