@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -21,19 +22,7 @@ public class TableViewController {
     private TableColumn<DataRow, String> dateCol;
 
     @FXML
-    private TableColumn<DataRow, String> openCol;
-
-    @FXML
-    private TableColumn<DataRow, String> highCol;
-
-    @FXML
-    private TableColumn<DataRow, String> lowCol;
-
-    @FXML
-    private TableColumn<DataRow, String> closeCol;
-
-    @FXML
-    private TableColumn<DataRow, String> volumeCol;
+    private TableColumn<DataRow, String> stockValueCol;
 
     @FXML
     private Label label1;
@@ -42,12 +31,8 @@ public class TableViewController {
     private void initialize() {
         dataRowTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        dateCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getDate()));
-        openCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getOpen()));
-        highCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getHigh()));
-        lowCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getLow()));
-        closeCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getClose()));
-        volumeCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getVolume()));
+        dateCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getDate().toString()));
+        stockValueCol.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getStockValue().toString()));
     }
 
     public void setDataAndLabel(List<DataRow> dataRowList, String filePath) {

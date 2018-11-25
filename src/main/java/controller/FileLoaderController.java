@@ -5,8 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
-import model.DataLoader;
+import model.AppleStockDataLoader;
 import model.DataRow;
+import model.DogeStockDataLoader;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -48,7 +49,7 @@ public class FileLoaderController {
 
             if (file != null) {
                 String filePath = file.getAbsolutePath();
-                DataLoader dl = new DataLoader(filePath);
+                DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
                 List<DataRow> data = dl.getStockData();
                 tableViewController.setDataAndLabel(data, filePath);
                 lineChartController.setData(data);
@@ -64,7 +65,7 @@ public class FileLoaderController {
         listView1.setOnMouseClicked(event -> {
             if (listView1.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
                 String filePath = (String) listView1.getSelectionModel().getSelectedItem();
-                DataLoader dl = new DataLoader(filePath);
+                DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
                 List<DataRow> data = dl.getStockData();
                 tableViewController.setDataAndLabel(data, filePath);
                 lineChartController.setData(data);
