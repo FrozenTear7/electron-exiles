@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AppleStockDataLoader extends AbstractDataLoader {
     private String delimiter = ",";
@@ -17,12 +15,14 @@ public class AppleStockDataLoader extends AbstractDataLoader {
     }
 
     @Override
-    public List<DataRow> getStockData() {
-        List<DataRow> dataRowList = new ArrayList<>();
-        String line;
+    public DataRowList getStockData() throws IOException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DataRowList dataRowList = new DataRowList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            String line;
+            int lineCounter = 0;
+
             while ((line = br.readLine()) != null) {
                 if (lineCounter == 0) {
                     lineCounter++;
@@ -30,10 +30,12 @@ public class AppleStockDataLoader extends AbstractDataLoader {
                     String[] parsedLine = line.split(delimiter);
 
                     if (parsedLine.length == columns)
-                        dataRowList.add(new DataRow(simpleDateFormat.parse(parsedLine[0]), Float.parseFloat(parsedLine[1])));
+                        dataRowList.addRow(new DataRow(simpleDateFormat.parse(parsedLine[0]), Float.parseFloat(parsedLine[2])));
+
+                    dataRowList.sortListByDate();
                 }
             }
-        } catch (IOException | ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

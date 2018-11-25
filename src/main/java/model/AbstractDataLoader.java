@@ -1,10 +1,9 @@
 package model;
 
-import java.util.List;
+import java.io.IOException;
 
 abstract class AbstractDataLoader {
     String csvFile;
-    int lineCounter = 0;
 
-    abstract List<DataRow> getStockData();
+    abstract DataRowList getStockData() throws IOException;
 }

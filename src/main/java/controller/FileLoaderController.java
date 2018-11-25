@@ -4,14 +4,16 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.AppleStockDataLoader;
-import model.DataRow;
+import model.DataRowList;
 import model.DogeStockDataLoader;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.regex.Pattern;
 
 public class FileLoaderController {
     private TableViewController tableViewController;
@@ -22,6 +24,9 @@ public class FileLoaderController {
 
     @FXML
     private ListView listView1;
+
+    @FXML
+    private Text errorInfo;
 
     @FXML
     private void initialize() {
@@ -37,6 +42,26 @@ public class FileLoaderController {
         this.lineChartController = lineChartController;
     }
 
+    private DataRowList getDataFromLoader(String filePath) throws IOException {
+        String dogeRegex = ".*doge\\.csv";
+        String appleRegex = ".*aapl.*\\.csv";
+
+        Pattern dogePattern = Pattern.compile(dogeRegex);
+        Pattern applePattern = Pattern.compile(appleRegex);
+
+
+        if (dogePattern.matcher(filePath).find()) {
+            DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
+            return dl.getStockData();
+        } else if (applePattern.matcher(filePath).find()) {
+            AppleStockDataLoader dl = new AppleStockDataLoader(filePath);
+            return dl.getStockData();
+        }
+
+        // UH OH FIX THAT
+        return null;
+    }
+
     private void handleButtonClick() {
         button1.setOnAction(event -> {
             FileChooser fc = new FileChooser();
@@ -49,10 +74,16 @@ public class FileLoaderController {
 
             if (file != null) {
                 String filePath = file.getAbsolutePath();
-                DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
-                List<DataRow> data = dl.getStockData();
-                tableViewController.setDataAndLabel(data, filePath);
-                lineChartController.setData(data);
+                DataRowList dataRowList = new DataRowList();
+
+                try {
+                    dataRowList = getDataFromLoader(filePath);
+                } catch (IOException e) {
+                    errorInfo.setText("Error while loading file!");
+                }
+
+                tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
+                lineChartController.setData(dataRowList.getDataRowList());
 
                 ObservableList listView1Items = listView1.getItems();
 
@@ -65,10 +96,17 @@ public class FileLoaderController {
         listView1.setOnMouseClicked(event -> {
             if (listView1.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
                 String filePath = (String) listView1.getSelectionModel().getSelectedItem();
-                DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
-                List<DataRow> data = dl.getStockData();
-                tableViewController.setDataAndLabel(data, filePath);
-                lineChartController.setData(data);
+
+                DataRowList dataRowList = new DataRowList();
+
+                try {
+                    dataRowList = getDataFromLoader(filePath);
+                } catch (IOException e) {
+                    errorInfo.setText("Error while loading file!");
+                }
+
+                tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
+                lineChartController.setData(dataRowList.getDataRowList());
             }
         });
     }

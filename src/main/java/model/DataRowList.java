@@ -1,13 +1,14 @@
 package model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.*;
 
+@Data
+@NoArgsConstructor
 public class DataRowList {
     private List<DataRow> dataRowList = new ArrayList<>();
-
-    public DataRowList() {
-
-    }
 
     public void addRow(DataRow dataRow) {
         dataRowList.add(dataRow);
