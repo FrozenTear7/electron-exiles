@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.LoadException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,29 +17,25 @@ public class DogeStockDataLoader extends AbstractDataLoader {
     }
 
     @Override
-    public DataRowList getStockData() {
-        // date format not working
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy");
+    public DataRowList getStockData() throws LoadException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM dd, yyyy");
         DataRowList dataRowList = new DataRowList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            String line;
-            int lineCounter = 0;
+            String line = br.readLine();
 
             while ((line = br.readLine()) != null) {
-                if (lineCounter == 0) {
-                    lineCounter++;
-                } else {
-                    String[] parsedLine = line.split(delimiter);
+                String[] parsedLine = line.split(delimiter);
 
-                    if (parsedLine.length == columns)
-                        dataRowList.addRow(new DataRow(simpleDateFormat.parse(parsedLine[0]), Float.parseFloat(parsedLine[2])));
+                if (parsedLine.length == columns)
+                    dataRowList.addRow(new DataRow(simpleDateFormat.parse(parsedLine[0]), (Float.parseFloat(parsedLine[2]) + Float.parseFloat(parsedLine[3])) / 2));
 
-                    dataRowList.sortListByDate();
-                }
+                dataRowList.sortListByDate();
             }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException e) {
+            throw new LoadException("Couldn't parse .csv data!");
+        } catch (IOException e) {
+            throw new LoadException("Couldn't load file!");
         }
 
         return dataRowList;

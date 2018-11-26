@@ -1,9 +1,11 @@
 package controller;
 
+import exceptions.LoadException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.AppleStockDataLoader;
@@ -11,7 +13,6 @@ import model.DataRowList;
 import model.DogeStockDataLoader;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
@@ -42,13 +43,12 @@ public class FileLoaderController {
         this.lineChartController = lineChartController;
     }
 
-    private DataRowList getDataFromLoader(String filePath) throws IOException {
+    private DataRowList getDataFromLoader(String filePath) throws LoadException {
         String dogeRegex = ".*doge\\.csv";
         String appleRegex = ".*aapl.*\\.csv";
 
         Pattern dogePattern = Pattern.compile(dogeRegex);
         Pattern applePattern = Pattern.compile(appleRegex);
-
 
         if (dogePattern.matcher(filePath).find()) {
             DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
@@ -58,7 +58,8 @@ public class FileLoaderController {
             return dl.getStockData();
         }
 
-        // UH OH FIX THAT
+        errorInfo.setText("Stock data not recognized!");
+        errorInfo.setFill(Color.RED);
         return null;
     }
 
@@ -78,15 +79,18 @@ public class FileLoaderController {
 
                 try {
                     dataRowList = getDataFromLoader(filePath);
-                } catch (IOException e) {
-                    errorInfo.setText("Error while loading file!");
+                } catch (LoadException e) {
+                    errorInfo.setText(e.getMessage());
+                    errorInfo.setFill(Color.RED);
                 }
 
-                tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
-                lineChartController.setData(dataRowList.getDataRowList());
+                if (dataRowList != null) {
+                    tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
+                    lineChartController.setData(dataRowList.getDataRowList());
+
+                }
 
                 ObservableList listView1Items = listView1.getItems();
-
                 if (!listView1Items.contains(filePath)) listView1Items.add(filePath);
             }
         });
@@ -101,8 +105,9 @@ public class FileLoaderController {
 
                 try {
                     dataRowList = getDataFromLoader(filePath);
-                } catch (IOException e) {
-                    errorInfo.setText("Error while loading file!");
+                } catch (LoadException e) {
+                    errorInfo.setText(e.getMessage());
+                    errorInfo.setFill(Color.RED);
                 }
 
                 tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
