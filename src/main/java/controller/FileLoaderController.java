@@ -63,19 +63,31 @@ public class FileLoaderController {
         return null;
     }
 
+    private File selectFile(){
+        FileChooser fc = new FileChooser();
+
+        fc.setInitialDirectory(new File(Paths.get("").toAbsolutePath().toString()));
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("CSV", "*.csv")
+        );
+
+        return fc.showOpenDialog(null);
+    }
+
+    private void updateViews(DataRowList dataRowList, String filePath){
+        tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
+        lineChartController.setData(dataRowList.getDataRowList());
+        ObservableList listView1Items = listView1.getItems();
+        if (!listView1Items.contains(filePath)) listView1Items.add(filePath);
+    }
+
     private void handleButtonClick() {
         button1.setOnAction(event -> {
-            FileChooser fc = new FileChooser();
-            fc.setInitialDirectory(new File(Paths.get("").toAbsolutePath().toString()));
-            fc.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("CSV", "*.csv")
-            );
-
-            File file = fc.showOpenDialog(null);
+            File file = selectFile();
 
             if (file != null) {
                 String filePath = file.getAbsolutePath();
-                DataRowList dataRowList = new DataRowList();
+                DataRowList dataRowList = null;
 
                 try {
                     dataRowList = getDataFromLoader(filePath);
@@ -85,13 +97,9 @@ public class FileLoaderController {
                 }
 
                 if (dataRowList != null) {
-                    tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
-                    lineChartController.setData(dataRowList.getDataRowList());
-
+                    updateViews(dataRowList, filePath);
                 }
 
-                ObservableList listView1Items = listView1.getItems();
-                if (!listView1Items.contains(filePath)) listView1Items.add(filePath);
             }
         });
     }
@@ -99,10 +107,10 @@ public class FileLoaderController {
     private void handleHistoryClick() {
         listView1.setOnMouseClicked(event -> {
             if (listView1.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
+
                 String filePath = (String) listView1.getSelectionModel().getSelectedItem();
 
-                DataRowList dataRowList = new DataRowList();
-
+                DataRowList dataRowList = null;
                 try {
                     dataRowList = getDataFromLoader(filePath);
                 } catch (LoadException e) {
