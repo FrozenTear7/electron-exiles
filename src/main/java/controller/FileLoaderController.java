@@ -2,9 +2,11 @@ package controller;
 
 import exceptions.LoadException;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -21,18 +23,18 @@ public class FileLoaderController {
     private LineChartController lineChartController;
 
     @FXML
-    private Button button1;
+    private Button openFileButton;
 
     @FXML
-    private ListView listView1;
+    private ListView historyView;
 
     @FXML
     private Text errorInfo;
 
     @FXML
     private void initialize() {
-        button1.setOnAction(event -> handleButtonClick());
-        handleHistoryClick();
+        openFileButton.setOnAction(this::handleButtonClick);
+        historyView.setOnMouseClicked(this::handleHistoryClick);
     }
 
     public void setTableViewController(TableViewController tableViewController) {
@@ -77,15 +79,19 @@ public class FileLoaderController {
     private void updateViews(DataRowList dataRowList, String filePath){
         tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
         lineChartController.setData(dataRowList.getDataRowList());
-        ObservableList listView1Items = listView1.getItems();
-        if (!listView1Items.contains(filePath)) listView1Items.add(filePath);
     }
 
-    private void handleButtonClick() {
+    private void updateHistory(String filePath){
+        ObservableList historyItems = historyView.getItems();
+        if (!historyItems.contains(filePath)) historyItems.add(filePath);
+    }
+
+    private void handleButtonClick(Event event) {
         File file = selectFile();
 
         if (file != null) {
             String filePath = file.getAbsolutePath();
+
             DataRowList dataRowList = null;
             try {
                 dataRowList = getDataFromLoader(filePath);
@@ -96,16 +102,15 @@ public class FileLoaderController {
 
             if (dataRowList != null) {
                 updateViews(dataRowList, filePath);
+                updateHistory(filePath);
             }
 
         }
     }
 
-    private void handleHistoryClick() {
-        listView1.setOnMouseClicked(event -> {
-            if (listView1.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
-
-                String filePath = (String) listView1.getSelectionModel().getSelectedItem();
+    private void handleHistoryClick(MouseEvent event) {
+            if (historyView.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
+                String filePath = (String) historyView.getSelectionModel().getSelectedItem();
 
                 DataRowList dataRowList = null;
                 try {
@@ -115,9 +120,7 @@ public class FileLoaderController {
                     errorInfo.setFill(Color.RED);
                 }
 
-                tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
-                lineChartController.setData(dataRowList.getDataRowList());
+                if (dataRowList != null) updateViews(dataRowList, filePath);
             }
-        });
     }
 }
