@@ -31,7 +31,7 @@ public class FileLoaderController {
 
     @FXML
     private void initialize() {
-        handleButtonClick();
+        button1.setOnAction(event -> handleButtonClick());
         handleHistoryClick();
     }
 
@@ -82,26 +82,23 @@ public class FileLoaderController {
     }
 
     private void handleButtonClick() {
-        button1.setOnAction(event -> {
-            File file = selectFile();
+        File file = selectFile();
 
-            if (file != null) {
-                String filePath = file.getAbsolutePath();
-                DataRowList dataRowList = null;
-
-                try {
-                    dataRowList = getDataFromLoader(filePath);
-                } catch (LoadException e) {
-                    errorInfo.setText(e.getMessage());
-                    errorInfo.setFill(Color.RED);
-                }
-
-                if (dataRowList != null) {
-                    updateViews(dataRowList, filePath);
-                }
-
+        if (file != null) {
+            String filePath = file.getAbsolutePath();
+            DataRowList dataRowList = null;
+            try {
+                dataRowList = getDataFromLoader(filePath);
+            } catch (LoadException e) {
+                errorInfo.setText(e.getMessage());
+                errorInfo.setFill(Color.RED);
             }
-        });
+
+            if (dataRowList != null) {
+                updateViews(dataRowList, filePath);
+            }
+
+        }
     }
 
     private void handleHistoryClick() {
