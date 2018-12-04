@@ -11,3 +11,4 @@ public class DataRow {
     private Date date;
     private Float stockValue;
 }
+    

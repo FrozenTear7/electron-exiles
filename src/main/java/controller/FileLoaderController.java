@@ -45,24 +45,39 @@ public class FileLoaderController {
         this.lineChartController = lineChartController;
     }
 
-    private DataRowList getDataFromLoader(String filePath) throws LoadException {
+    private DataRowList getDataFromLoader(String filePath) {
         String dogeRegex = ".*doge\\.csv";
         String appleRegex = ".*aapl.*\\.csv";
 
         Pattern dogePattern = Pattern.compile(dogeRegex);
         Pattern applePattern = Pattern.compile(appleRegex);
 
+        DataRowList dataRowList = null;
+
         if (dogePattern.matcher(filePath).find()) {
             DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
-            return dl.getStockData();
+
+            try {
+                dataRowList = dl.getStockData();
+            } catch (LoadException e) {
+                errorInfo.setText(e.getMessage());
+                errorInfo.setFill(Color.RED);
+            }
         } else if (applePattern.matcher(filePath).find()) {
             AppleStockDataLoader dl = new AppleStockDataLoader(filePath);
-            return dl.getStockData();
+
+            try {
+                dataRowList = dl.getStockData();
+            } catch (LoadException e) {
+                errorInfo.setText(e.getMessage());
+                errorInfo.setFill(Color.RED);
+            }
+        } else {
+            errorInfo.setText("Stock data not recognized!");
+            errorInfo.setFill(Color.RED);
         }
 
-        errorInfo.setText("Stock data not recognized!");
-        errorInfo.setFill(Color.RED);
-        return null;
+        return dataRowList;
     }
 
     private File selectFile(){
@@ -92,13 +107,7 @@ public class FileLoaderController {
         if (file != null) {
             String filePath = file.getAbsolutePath();
 
-            DataRowList dataRowList = null;
-            try {
-                dataRowList = getDataFromLoader(filePath);
-            } catch (LoadException e) {
-                errorInfo.setText(e.getMessage());
-                errorInfo.setFill(Color.RED);
-            }
+            DataRowList dataRowList = getDataFromLoader(filePath);
 
             if (dataRowList != null) {
                 updateViews(dataRowList, filePath);
@@ -112,13 +121,7 @@ public class FileLoaderController {
             if (historyView.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
                 String filePath = (String) historyView.getSelectionModel().getSelectedItem();
 
-                DataRowList dataRowList = null;
-                try {
-                    dataRowList = getDataFromLoader(filePath);
-                } catch (LoadException e) {
-                    errorInfo.setText(e.getMessage());
-                    errorInfo.setFill(Color.RED);
-                }
+                DataRowList dataRowList = getDataFromLoader(filePath);
 
                 if (dataRowList != null) updateViews(dataRowList, filePath);
             }
