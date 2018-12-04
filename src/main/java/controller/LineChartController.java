@@ -5,8 +5,12 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.util.Pair;
 import model.DataRow;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,26 +26,108 @@ public class LineChartController {
     private NumberAxis yAxis = new NumberAxis();
 
     @FXML
-    private LineChart<String, Number> lineChart1 = new LineChart<>(xAxis, yAxis);
+    private LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+
+    @FXML
+    private Button buttonZoomIn;
+
+    @FXML
+    private Button buttonZoomOut;
+
+    @FXML
+    private Button buttonShiftRight;
+
+    @FXML
+    private Button buttonShiftLeft;
+
+    private List<DataRow> data;
+    private int zoomLevel = 0;
+    private double position = 0.5;
+
+    private int MAX_ZOOM_LVL = 10;
+    private int MIN_ZOOM_LVL = 0;
 
     @FXML
     private void initialize() {
         xAxis.setLabel("Date");
         xAxis.setTickLabelFont(font("Comic Sans MS"));
+        yAxis.setTickLabelGap(100);
+
         yAxis.setLabel("Value");
         yAxis.setAutoRanging(true);
         yAxis.setTickLabelFont(font("Comic Sans MS"));
 
-        lineChart1.setTitle("stock values");
-        lineChart1.setCreateSymbols(false);
+        lineChart.setTitle("stock values");
+        lineChart.setCreateSymbols(false);
+
+        handleButtonsClick();
+    }
+
+    private void handleButtonsClick() {
+        buttonZoomIn.setOnAction(event -> {
+            zoomLevel++;
+            if(zoomLevel>MAX_ZOOM_LVL){
+                zoomLevel = MAX_ZOOM_LVL;
+                return;
+            }
+            adjustData();
+        });
+
+        buttonZoomOut.setOnAction(event -> {
+            zoomLevel--;
+            if(zoomLevel<MIN_ZOOM_LVL){
+                zoomLevel = MIN_ZOOM_LVL;
+                return;
+            }
+            position = (int) (position * Math.pow(2, zoomLevel+1));
+            if(position == 0) position = 1;
+            position *= Math.pow(0.5, zoomLevel+1);
+            adjustData();
+        });
+
+        buttonShiftRight.setOnAction(event -> {
+            if(position + Math.pow(0.5, zoomLevel+1) >= 1) return;
+            position += Math.pow(0.5, zoomLevel+1);
+            adjustData();
+        });
+
+        buttonShiftLeft.setOnAction(event -> {
+            if(position <= Math.pow(0.5, zoomLevel+1)) return;
+            position -= Math.pow(0.5, zoomLevel+1);
+            adjustData();
+        });
     }
 
     public void setData(List<DataRow> data) {
+        this.data = data;
+        MAX_ZOOM_LVL = (int)Math.floor(Math.log(data.size())/Math.log(2));
+        zoomLevel = 0;
+        position = 0.5;
         List<XYChart.Series<String, Number>> series = mapToSeries(data);
-        lineChart1.getData().clear();
-        lineChart1.getData().add(series.get(0));
+        lineChart.getData().clear();
+        lineChart.getData().add(series.get(0));
     }
 
+    private void adjustData() {
+        List<XYChart.Series<String, Number>> series = mapToSeries(getZoomedData());
+        lineChart.getData().clear();
+        lineChart.getData().add(series.get(0));
+    }
+
+    private List<DataRow> getZoomedData() {
+        return new ArrayList<>(data.subList(calculateNewRanges().getKey(), calculateNewRanges().getValue()));
+    }
+
+    private Pair<Integer, Integer> calculateNewRanges() {
+        int len = data.size();
+        int lenZoomed = (int) (len/Math.pow(2, zoomLevel));
+        int pos = (int) (this.position*len);
+        int left = pos - lenZoomed / 2;
+        if(left < 0) left = 0;
+        int right = pos + lenZoomed / 2;
+        if(right > len) right = len;
+        return new Pair<>(left, right);
+    }
 
     private List<XYChart.Series<String, Number>> mapToSeries(List<DataRow> data) {
         List<XYChart.Series<String, Number>> series = new ArrayList<>();
@@ -50,9 +136,14 @@ public class LineChartController {
         series.get(0).setName("value");
 
         for (DataRow row : data) {
-            series.get(0).getData().add(new XYChart.Data<String, Number>(row.getDate().toString(), row.getStockValue()));
+            series.get(0).getData().add(new XYChart.Data<String, Number>(getDateLabel(row.getDate()), row.getStockValue()));
         }
 
         return series;
+    }
+
+    private String getDateLabel(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(date);
     }
 }

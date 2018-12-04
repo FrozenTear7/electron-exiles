@@ -35,6 +35,17 @@ public class FileLoaderController {
     private void initialize() {
         openFileButton.setOnAction(this::handleButtonClick);
         historyView.setOnMouseClicked(this::handleHistoryClick);
+
+        // Hardcoded adding .csv to the list for easier testing
+        ClassLoader classLoader = getClass().getClassLoader();
+
+        File dogeCsv = new File(classLoader.getResource("doge.csv").getFile());
+        File appleCsvMini = new File(classLoader.getResource("aapl_us_d.csv").getFile());
+        File appleCsv = new File(classLoader.getResource("aapl_us_d_2016.csv").getFile());
+
+        historyView.getItems().add(dogeCsv.getAbsolutePath());
+        historyView.getItems().add(appleCsvMini.getAbsolutePath());
+        historyView.getItems().add(appleCsv.getAbsolutePath());
     }
 
     public void setTableViewController(TableViewController tableViewController) {
@@ -80,7 +91,7 @@ public class FileLoaderController {
         return dataRowList;
     }
 
-    private File selectFile(){
+    private File selectFile() {
         FileChooser fc = new FileChooser();
 
         fc.setInitialDirectory(new File(Paths.get("").toAbsolutePath().toString()));
@@ -91,12 +102,12 @@ public class FileLoaderController {
         return fc.showOpenDialog(null);
     }
 
-    private void updateViews(DataRowList dataRowList, String filePath){
+    private void updateViews(DataRowList dataRowList, String filePath) {
         tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
         lineChartController.setData(dataRowList.getDataRowList());
     }
 
-    private void updateHistory(String filePath){
+    private void updateHistory(String filePath) {
         ObservableList historyItems = historyView.getItems();
         if (!historyItems.contains(filePath)) historyItems.add(filePath);
     }
@@ -118,12 +129,12 @@ public class FileLoaderController {
     }
 
     private void handleHistoryClick(MouseEvent event) {
-            if (historyView.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
-                String filePath = (String) historyView.getSelectionModel().getSelectedItem();
+        if (historyView.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
+            String filePath = (String) historyView.getSelectionModel().getSelectedItem();
 
-                DataRowList dataRowList = getDataFromLoader(filePath);
+            DataRowList dataRowList = getDataFromLoader(filePath);
 
-                if (dataRowList != null) updateViews(dataRowList, filePath);
-            }
+            if (dataRowList != null) updateViews(dataRowList, filePath);
+        }
     }
 }

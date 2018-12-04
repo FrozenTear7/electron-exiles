@@ -34,7 +34,7 @@ public class App extends Application {
             fileLoaderController.setTableViewController(tableViewController);
             fileLoaderController.setLineChartController(lineChartController);
 
-            Scene scene = new Scene(root, 1200, 800);
+            Scene scene = new Scene(root, 1200, 900);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
