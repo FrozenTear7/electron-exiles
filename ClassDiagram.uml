@@ -3,97 +3,165 @@
   <ID>JAVA</ID>
   <OriginalElement>App</OriginalElement>
   <nodes>
-    <node x="893.2966666666666" y="805.0">App</node>
-    <node x="0.0" y="451.0">controller.LineChartController</node>
-    <node x="736.0" y="462.0">controller.TableViewController</node>
-    <node x="588.8297619047619" y="0.0">model.DataRow</node>
-    <node x="459.0" y="473.0">model.DataLoader</node>
-    <node x="973.18" y="661.0">javafx.application</node>
-    <node x="359.69142857142856" y="606.0">controller.FileLoaderController</node>
+    <node x="483.7470538720539" y="1363.0">App</node>
+    <node x="399.66666666666663" y="625.0">model.AbstractDataLoader</node>
+    <node x="925.6175505050505" y="801.0">controller.LineChartController</node>
+    <node x="0.0" y="351.0">controller.TableViewController</node>
+    <node x="634.6666666666666" y="570.0">exceptions.LoadException</node>
+    <node x="396.87601010101014" y="285.0">model.DataRowList</node>
+    <node x="318.8675505050506" y="0.0">model.DataRow</node>
+    <node x="672.8467171717173" y="878.0">model.DogeStockDataLoader</node>
+    <node x="309.31249999999994" y="878.0">model.AppleStockDataLoader</node>
+    <node x="402.2470538720539" y="1086.0">controller.FileLoaderController</node>
   </nodes>
   <notes />
   <edges>
     <edge source="App" target="controller.TableViewController">
-      <point x="0.0" y="-36.5" />
-      <point x="985.2966666666666" y="765.0" />
-      <point x="942.68" y="765.0" />
-      <point x="942.68" y="586.0" />
-      <point x="1026.8333333333333" y="586.0" />
-      <point x="116.33333333333326" y="36.5" />
+      <point x="-56.33333333333337" y="-36.5" />
+      <point x="511.91372053872055" y="1338.0" />
+      <point x="117.8844276094278" y="1338.0" />
+      <point x="117.8844276094278" y="550.0" />
+      <point x="51.66666666666674" y="550.0" />
+      <point x="-103.33333333333326" y="36.5" />
     </edge>
-    <edge source="controller.FileLoaderController" target="controller.LineChartController">
-      <point x="-159.85714285714295" y="-69.5" />
-      <point x="386.3342857142856" y="576.0" />
-      <point x="219.0" y="576.0" />
-      <point x="0.0" y="47.5" />
+    <edge source="controller.FileLoaderController" target="model.AppleStockDataLoader">
+      <point x="-49.799999999999955" y="-113.5" />
+      <point x="518.447053872054" y="1036.0" />
+      <point x="363.06249999999994" y="1036.0" />
+      <point x="-53.75" y="25.5" />
+    </edge>
+    <edge source="model.AppleStockDataLoader" target="model.DataRowList">
+      <point x="-53.75" y="-25.5" />
+      <point x="363.06249999999994" y="781.0" />
+      <point x="368.7842171717172" y="781.0" />
+      <point x="368.7842171717172" y="530.0" />
+      <point x="463.87601010101014" y="530.0" />
+      <point x="-67.0" y="102.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="model.DogeStockDataLoader">
+      <point x="49.799999999999955" y="-113.5" />
+      <point x="618.0470538720539" y="1036.0" />
+      <point x="726.5967171717173" y="1036.0" />
+      <point x="-53.75" y="25.5" />
+    </edge>
+    <edge source="model.AppleStockDataLoader" target="model.AbstractDataLoader">
+      <point x="17.91666666666663" y="-25.5" />
+      <point x="434.7291666666666" y="781.0" />
+      <point x="426.54166666666663" y="781.0" />
+      <point x="-80.625" y="25.5" />
+    </edge>
+    <edge source="model.DogeStockDataLoader" target="model.AbstractDataLoader">
+      <point x="-53.75" y="-25.5" />
+      <point x="726.5967171717173" y="751.0" />
+      <point x="587.7916666666666" y="751.0" />
+      <point x="80.625" y="25.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="exceptions.LoadException">
+      <point x="16.600000000000023" y="-113.5" />
+      <point x="584.847053872054" y="1026.0" />
+      <point x="646.8258838383839" y="1026.0" />
+      <point x="646.8258838383839" y="781.0" />
+      <point x="737.6666666666666" y="781.0" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="model.DogeStockDataLoader" target="exceptions.LoadException">
+      <point x="-17.91666666666663" y="-25.5" />
+      <point x="762.4300505050505" y="751.0" />
+      <point x="806.3333333333334" y="751.0" />
+      <point x="68.66666666666674" y="80.5" />
     </edge>
     <edge source="controller.TableViewController" target="model.DataRow">
-      <point x="0.0" y="-36.5" />
-      <point x="910.5" y="421.0" />
-      <point x="767.1869047619047" y="421.0" />
-      <point x="64.85714285714278" y="190.5" />
+      <point x="-103.33333333333326" y="-36.5" />
+      <point x="51.66666666666674" y="235.0" />
+      <point x="330.31199494949504" y="235.0" />
+      <point x="-91.55555555555554" y="102.5" />
+    </edge>
+    <edge source="controller.FileLoaderController" target="controller.LineChartController">
+      <point x="149.4000000000001" y="-113.5" />
+      <point x="717.647053872054" y="1066.0" />
+      <point x="1120.6175505050505" y="1066.0" />
+      <point x="0.0" y="102.5" />
+    </edge>
+    <edge source="model.DataRowList" target="model.DataRow">
+      <point x="-67.0" y="-102.5" />
+      <point x="463.87601010101014" y="265.0" />
+      <point x="421.8675505050506" y="265.0" />
+      <point x="0.0" y="102.5" />
+    </edge>
+    <edge source="model.AbstractDataLoader" target="model.DataRowList">
+      <point x="0.0" y="-25.5" />
+      <point x="507.16666666666663" y="550.0" />
+      <point x="553.2093434343434" y="550.0" />
+      <point x="22.333333333333258" y="102.5" />
+    </edge>
+    <edge source="model.AppleStockDataLoader" target="model.DataRow">
+      <point x="-89.58333333333337" y="-25.5" />
+      <point x="327.2291666666666" y="781.0" />
+      <point x="320.5" y="781.0" />
+      <point x="320.5" y="265.0" />
+      <point x="398.9786616161617" y="265.0" />
+      <point x="-22.888888888888914" y="102.5" />
     </edge>
     <edge source="controller.LineChartController" target="model.DataRow">
-      <point x="0.0" y="-47.5" />
-      <point x="219.0" y="401.0" />
-      <point x="605.0440476190475" y="401.0" />
-      <point x="-97.28571428571433" y="190.5" />
+      <point x="-97.5" y="-102.5" />
+      <point x="1023.1175505050505" y="781.0" />
+      <point x="1141.6637205387206" y="781.0" />
+      <point x="1141.6637205387206" y="235.0" />
+      <point x="490.5342171717172" y="235.0" />
+      <point x="68.66666666666663" y="102.5" />
+    </edge>
+    <edge source="model.DogeStockDataLoader" target="model.DataRow">
+      <point x="89.58333333333337" y="-25.5" />
+      <point x="869.9300505050505" y="781.0" />
+      <point x="986.9176767676768" y="781.0" />
+      <point x="986.9176767676768" y="245.0" />
+      <point x="467.6453282828284" y="245.0" />
+      <point x="45.77777777777783" y="102.5" />
     </edge>
     <edge source="App" target="controller.LineChartController">
-      <point x="-73.60000000000002" y="-36.5" />
-      <point x="911.6966666666666" y="785.0" />
-      <point x="222.56642857142856" y="785.0" />
-      <point x="222.56642857142856" y="586.0" />
-      <point x="73.0" y="586.0" />
-      <point x="-146.0" y="47.5" />
+      <point x="56.33333333333337" y="-36.5" />
+      <point x="624.5803872053873" y="1338.0" />
+      <point x="1163.8719276094278" y="1338.0" />
+      <point x="1163.8719276094278" y="1066.0" />
+      <point x="1250.6175505050505" y="1066.0" />
+      <point x="130.0" y="102.5" />
     </edge>
-    <edge source="model.DataLoader" target="model.DataRow">
-      <point x="-64.25" y="-25.5" />
-      <point x="523.25" y="421.0" />
-      <point x="669.9011904761904" y="421.0" />
-      <point x="-32.428571428571445" y="190.5" />
+    <edge source="model.AppleStockDataLoader" target="exceptions.LoadException">
+      <point x="89.58333333333337" y="-25.5" />
+      <point x="506.3958333333333" y="771.0" />
+      <point x="669.0" y="771.0" />
+      <point x="-68.66666666666663" y="80.5" />
     </edge>
-    <edge source="App" target="javafx.application">
-      <point x="36.799999999999955" y="-36.5" />
-      <point x="1022.0966666666666" y="785.0" />
-      <point x="1050.1799999999998" y="785.0" />
-      <point x="0.0" y="14.5" />
+    <edge source="controller.FileLoaderController" target="model.DataRowList">
+      <point x="-83.0" y="-113.5" />
+      <point x="485.2470538720539" y="1046.0" />
+      <point x="206.73859427609443" y="1046.0" />
+      <point x="206.73859427609443" y="520.0" />
+      <point x="419.2093434343435" y="520.0" />
+      <point x="-111.66666666666663" y="102.5" />
+    </edge>
+    <edge source="model.DogeStockDataLoader" target="model.DataRowList">
+      <point x="53.75" y="-25.5" />
+      <point x="834.0967171717173" y="771.0" />
+      <point x="975.9176767676768" y="771.0" />
+      <point x="975.9176767676768" y="540.0" />
+      <point x="642.5426767676768" y="540.0" />
+      <point x="111.66666666666663" y="102.5" />
     </edge>
     <edge source="controller.FileLoaderController" target="controller.TableViewController">
-      <point x="106.57142857142856" y="-69.5" />
-      <point x="652.7628571428571" y="576.0" />
-      <point x="794.1666666666666" y="576.0" />
-      <point x="-116.33333333333337" y="36.5" />
-    </edge>
-    <edge source="javafx.application" target="javafx.application">
-      <point x="-51.333333333333314" y="14.5" />
-      <point x="998.8466666666666" y="710.0" />
-      <point x="953.18" y="710.0" />
-      <point x="953.18" y="675.5" />
-      <point x="-77.0" y="-0.0" />
+      <point x="-116.19999999999993" y="-113.5" />
+      <point x="452.047053872054" y="1056.0" />
+      <point x="195.73859427609443" y="1056.0" />
+      <point x="195.73859427609443" y="510.0" />
+      <point x="258.33333333333326" y="510.0" />
+      <point x="103.33333333333326" y="36.5" />
     </edge>
     <edge source="App" target="controller.FileLoaderController">
-      <point x="-36.799999999999955" y="-36.5" />
-      <point x="948.4966666666667" y="775.0" />
-      <point x="546.1914285714286" y="775.0" />
-      <point x="0.0" y="69.5" />
-    </edge>
-    <edge source="controller.FileLoaderController" target="model.DataRow">
-      <point x="-53.285714285714334" y="-69.5" />
-      <point x="492.9057142857142" y="586.0" />
-      <point x="448.5" y="586.0" />
-      <point x="448.5" y="411.0" />
-      <point x="637.472619047619" y="411.0" />
-      <point x="-64.85714285714289" y="190.5" />
-    </edge>
-    <edge source="controller.FileLoaderController" target="model.DataLoader">
-      <point x="0.0" y="-69.5" />
-      <point x="546.1914285714286" y="586.0" />
-      <point x="523.25" y="586.0" />
-      <point x="-64.25" y="25.5" />
+      <point x="0.0" y="-36.5" />
+      <point x="0.0" y="113.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6469912945415658" x="548.0" y="629.9314651489257" />
+  <settings layout="Hierarchic Group" zoom="0.6263736263736264" x="658.0" y="718.0" />
   <SelectedNodes />
   <Categories>
     <Category>Methods</Category>
