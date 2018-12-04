@@ -66,7 +66,7 @@ public class LineChartController {
     private void handleButtonsClick() {
         buttonZoomIn.setOnAction(event -> {
             zoomLevel++;
-            if(zoomLevel>MAX_ZOOM_LVL){
+            if (zoomLevel > MAX_ZOOM_LVL) {
                 zoomLevel = MAX_ZOOM_LVL;
                 return;
             }
@@ -75,32 +75,32 @@ public class LineChartController {
 
         buttonZoomOut.setOnAction(event -> {
             zoomLevel--;
-            if(zoomLevel<MIN_ZOOM_LVL){
+            if (zoomLevel < MIN_ZOOM_LVL) {
                 zoomLevel = MIN_ZOOM_LVL;
                 return;
             }
-            position = (int) (position * Math.pow(2, zoomLevel+1));
-            if(position == 0) position = 1;
-            position *= Math.pow(0.5, zoomLevel+1);
+            position = (int) (position * Math.pow(2, zoomLevel + 1));
+            if (position == 0) position = 1;
+            position *= Math.pow(0.5, zoomLevel + 1);
             adjustData();
         });
 
         buttonShiftRight.setOnAction(event -> {
-            if(position + Math.pow(0.5, zoomLevel+1) >= 1) return;
-            position += Math.pow(0.5, zoomLevel+1);
+            if (position + Math.pow(0.5, zoomLevel + 1) >= 1) return;
+            position += Math.pow(0.5, zoomLevel + 1);
             adjustData();
         });
 
         buttonShiftLeft.setOnAction(event -> {
-            if(position <= Math.pow(0.5, zoomLevel+1)) return;
-            position -= Math.pow(0.5, zoomLevel+1);
+            if (position <= Math.pow(0.5, zoomLevel + 1)) return;
+            position -= Math.pow(0.5, zoomLevel + 1);
             adjustData();
         });
     }
 
     public void setData(List<DataRow> data) {
         this.data = data;
-        MAX_ZOOM_LVL = (int)Math.floor(Math.log(data.size())/Math.log(2));
+        MAX_ZOOM_LVL = (int) Math.floor(Math.log(data.size()) / Math.log(2));
         zoomLevel = 0;
         position = 0.5;
         List<XYChart.Series<String, Number>> series = mapToSeries(data);
@@ -120,12 +120,12 @@ public class LineChartController {
 
     private Pair<Integer, Integer> calculateNewRanges() {
         int len = data.size();
-        int lenZoomed = (int) (len/Math.pow(2, zoomLevel));
-        int pos = (int) (this.position*len);
+        int lenZoomed = (int) (len / Math.pow(2, zoomLevel));
+        int pos = (int) (this.position * len);
         int left = pos - lenZoomed / 2;
-        if(left < 0) left = 0;
+        if (left < 0) left = 0;
         int right = pos + lenZoomed / 2;
-        if(right > len) right = len;
+        if (right > len) right = len;
         return new Pair<>(left, right);
     }
 
@@ -142,7 +142,7 @@ public class LineChartController {
         return series;
     }
 
-    private String getDateLabel(Date date){
+    private String getDateLabel(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return dateFormat.format(date);
     }

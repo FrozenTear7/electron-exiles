@@ -37,6 +37,6 @@ class LineChartControllerTest extends CommonControllerTest {
 
     @Test
     void should_render_line_chart() {
-        verifyThat("#lineChart1", NodeMatchers.isNotNull());
+        verifyThat("#lineChart", NodeMatchers.isNotNull());
     }
 }

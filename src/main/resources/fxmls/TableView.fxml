@@ -18,5 +18,5 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
-   <Label fx:id="label1" layoutX="14.0" layoutY="14.0" />
+   <Label fx:id="label" layoutX="14.0" layoutY="14.0" />
 </AnchorPane>

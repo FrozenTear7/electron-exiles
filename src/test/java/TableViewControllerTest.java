@@ -36,12 +36,8 @@ class TableViewControllerTest extends CommonControllerTest {
     }
 
     @Test
-    void should_have_6_specific_columns() {
+    void should_have_2_specific_columns() {
         verifyThat("#dateCol", NodeMatchers.isNotNull());
-        verifyThat("#openCol", NodeMatchers.isNotNull());
-        verifyThat("#highCol", NodeMatchers.isNotNull());
-        verifyThat("#lowCol", NodeMatchers.isNotNull());
-        verifyThat("#closeCol", NodeMatchers.isNotNull());
-        verifyThat("#volumeCol", NodeMatchers.isNotNull());
+        verifyThat("#stockValueCol", NodeMatchers.isNotNull());
     }
 }
