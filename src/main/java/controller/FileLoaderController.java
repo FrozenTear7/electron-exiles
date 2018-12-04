@@ -33,6 +33,7 @@ public class FileLoaderController {
     private void initialize() {
         handleButtonClick();
         handleHistoryClick();
+        listView1.getItems().add("C:\\#wojtek\\TO@\\electron-exiles\\src\\main\\resources\\aapl_us_d_2016.csv");
     }
 
     public void setTableViewController(TableViewController tableViewController) {
@@ -87,7 +88,7 @@ public class FileLoaderController {
                 if (dataRowList != null) {
                     tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
                     lineChartController.setData(dataRowList.getDataRowList());
-
+                    errorInfo.setText("");
                 }
 
                 ObservableList listView1Items = listView1.getItems();
@@ -110,8 +111,12 @@ public class FileLoaderController {
                     errorInfo.setFill(Color.RED);
                 }
 
-                tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
-                lineChartController.setData(dataRowList.getDataRowList());
+                if (dataRowList != null) {
+                    tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
+                    lineChartController.setData(dataRowList.getDataRowList());
+                    errorInfo.setText("");
+                }
+
             }
         });
     }
