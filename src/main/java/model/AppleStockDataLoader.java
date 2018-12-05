@@ -29,9 +29,7 @@ public class AppleStockDataLoader extends AbstractDataLoader {
 
                 if (parsedLine.length == columns)
                     dataRowList.addRow(new DataRow(simpleDateFormat.parse(parsedLine[0]), (Float.parseFloat(parsedLine[2]) + Float.parseFloat(parsedLine[3])) / 2));
-
                 dataRowList.sortListByDate();
-
             }
         } catch (ParseException e) {
             throw new LoadException("Couldn't parse .csv data!");

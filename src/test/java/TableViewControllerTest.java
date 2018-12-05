@@ -32,7 +32,7 @@ class TableViewControllerTest extends CommonControllerTest {
 
     @Test
     void should_have_label() {
-        verifyThat("#label1", NodeMatchers.isNotNull());
+        verifyThat("#label", NodeMatchers.isNotNull());
     }
 
     @Test

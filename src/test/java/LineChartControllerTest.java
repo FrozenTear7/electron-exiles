@@ -39,4 +39,24 @@ class LineChartControllerTest extends CommonControllerTest {
     void should_render_line_chart() {
         verifyThat("#lineChart", NodeMatchers.isNotNull());
     }
+
+    @Test
+    void should_render_button_zoom_out() {
+        verifyThat("#buttonZoomIn", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    void should_render_button_zoom_int() {
+        verifyThat("#buttonZoomOut", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    void should_render_button_shift_left() {
+        verifyThat("#buttonShiftRight", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    void should_render_shift_right() {
+        verifyThat("#buttonShiftLeft", NodeMatchers.isNotNull());
+    }
 }
