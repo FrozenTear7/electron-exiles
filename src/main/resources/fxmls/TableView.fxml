@@ -12,11 +12,7 @@
         </placeholder>
         <columns>
             <TableColumn fx:id="dateCol" text="Date" />
-            <TableColumn fx:id="openCol" text="Open" />
-            <TableColumn fx:id="highCol" prefWidth="82.0" text="High" />
-            <TableColumn fx:id="lowCol" prefWidth="81.0" text="Low" />
-            <TableColumn fx:id="closeCol" text="Close" />
-            <TableColumn fx:id="volumeCol" text="Volume" />
+            <TableColumn fx:id="stockValueCol" text="StockValue" />
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
