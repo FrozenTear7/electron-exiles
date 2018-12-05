@@ -24,7 +24,7 @@ public class TableViewController {
     private TableColumn<DataRow, String> stockValueCol;
 
     @FXML
-    private Label label1;
+    private Label label;
 
     @FXML
     private void initialize() {
@@ -37,6 +37,6 @@ public class TableViewController {
     public void setDataAndLabel(List<DataRow> dataRowList, String filePath) {
         this.dataRowList = dataRowList;
         dataRowTableView.setItems(FXCollections.observableArrayList(dataRowList));
-        label1.setText("File opened: " + filePath);
+        label.setText("File opened: " + filePath);
     }
 }

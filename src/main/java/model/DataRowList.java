@@ -22,4 +22,8 @@ public class DataRowList {
             }
         });
     }
+
+    public int size() {
+        return dataRowList.size();
+    }
 }
