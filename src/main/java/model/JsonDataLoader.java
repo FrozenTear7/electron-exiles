@@ -1,36 +1,36 @@
 package model;
 
 import exceptions.LoadException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 
 public class JsonDataLoader implements IDataLoader {
-    public JsonDataLoader() {}
+    public JsonDataLoader() {
+    }
 
     @Override
     public DataRowList getStockData(String csvFile) throws LoadException {
         DataRowList dataRowList = new DataRowList();
 
-        Gson gson = new Gson();
+        JSONParser jsonParser = new JSONParser();
+        JSONArray jsonArray;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            String line = br.readLine();
-            String delimiter = getDelimiter(line);
-            int columns = line.split(delimiter).length;
+        try {
+            jsonArray = (JSONArray) jsonParser.parse(new FileReader(csvFile));
+        } catch (ParseException | IOException e) {
+            throw new LoadException("File not found!");
+        }
 
-            while ((line = br.readLine()) != null) {
-                String[] parsedLine = line.split(delimiter);
-
-                if (parsedLine.length == columns) {
-                    dataRowList.addRow(new DataRow(parsedLine[0], parsedLine[2]));
-                }
-
-                dataRowList.sortListByDate();
-            }
-        } catch (IOException e) {
-            throw new LoadException("Couldn't load file!");
+        Iterator<JSONObject> iterator = jsonArray.iterator();
+        while (iterator.hasNext()) {
+            JSONObject nextObject = iterator.next();
+            dataRowList.addRow(new DataRow((String) nextObject.get("Date"), (nextObject.get("High").toString())));
         }
 
         return dataRowList;

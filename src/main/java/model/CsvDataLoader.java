@@ -40,8 +40,6 @@ public class CsvDataLoader implements IDataLoader {
                 if (parsedLine.length == columns) {
                     dataRowList.addRow(new DataRow(parsedLine[0], parsedLine[2]));
                 }
-
-                dataRowList.sortListByDate();
             }
         } catch (IOException e) {
             throw new LoadException("Couldn't load file!");

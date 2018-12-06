@@ -12,9 +12,6 @@ public class DataRowList {
 
     public void addRow(DataRow dataRow) {
         dataRowList.add(dataRow);
-    }
-
-    public void sortListByDate() {
         Collections.sort(dataRowList, new Comparator<DataRow>() {
             @Override
             public int compare(DataRow lhs, DataRow rhs) {
