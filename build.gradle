@@ -18,4 +18,5 @@ dependencies {
     testCompile "org.testfx:testfx-core:4.0.15-alpha"
     testCompile "org.testfx:testfx-junit5:4.0.15-alpha"
     compileOnly 'org.projectlombok:lombok:1.16.18'
+    compileOnly 'com.google.code.gson:gson:2.8.2'
 }

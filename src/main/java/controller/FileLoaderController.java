@@ -10,9 +10,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import model.AppleStockDataLoader;
+import model.CsvDataLoader;
 import model.DataRowList;
-import model.DogeStockDataLoader;
+import model.JsonDataLoader;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -57,28 +57,27 @@ public class FileLoaderController {
     }
 
     private DataRowList getDataFromLoader(String filePath) {
-        String dogeRegex = ".*doge\\.csv";
-        String appleRegex = ".*aapl.*\\.csv";
-
-        Pattern dogePattern = Pattern.compile(dogeRegex);
-        Pattern applePattern = Pattern.compile(appleRegex);
+        String csvRegex = ".*\\.csv";
+        String jsonRegex = ".*\\.json";
+        Pattern csvPattern = Pattern.compile(csvRegex);
+        Pattern jsonPattern = Pattern.compile(jsonRegex);
 
         DataRowList dataRowList = null;
 
-        if (dogePattern.matcher(filePath).find()) {
-            DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
+        if (csvPattern.matcher(filePath).find()) {
+            CsvDataLoader dl = new CsvDataLoader();
 
             try {
-                dataRowList = dl.getStockData();
+                dataRowList = dl.getStockData(filePath);
             } catch (LoadException e) {
                 errorInfo.setText(e.getMessage());
                 errorInfo.setFill(Color.RED);
             }
-        } else if (applePattern.matcher(filePath).find()) {
-            AppleStockDataLoader dl = new AppleStockDataLoader(filePath);
+        } else if (jsonPattern.matcher(filePath).find()) {
+            JsonDataLoader dl = new JsonDataLoader();
 
             try {
-                dataRowList = dl.getStockData();
+                dataRowList = dl.getStockData(filePath);
             } catch (LoadException e) {
                 errorInfo.setText(e.getMessage());
                 errorInfo.setFill(Color.RED);
@@ -96,7 +95,8 @@ public class FileLoaderController {
 
         fc.setInitialDirectory(new File(Paths.get("").toAbsolutePath().toString()));
         fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("CSV", "*.csv")
+                new FileChooser.ExtensionFilter("CSV", "*.csv"),
+                new FileChooser.ExtensionFilter("JSON", "*.json")
         );
 
         return fc.showOpenDialog(null);
