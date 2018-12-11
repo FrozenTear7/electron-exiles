@@ -19,5 +19,4 @@ dependencies {
     testCompile "org.testfx:testfx-junit5:4.0.15-alpha"
     compileOnly 'org.projectlombok:lombok:1.16.18'
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
-
 }

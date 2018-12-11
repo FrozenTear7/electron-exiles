@@ -5,10 +5,12 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../src/test">
       <sourceFolder url="file://$MODULE_DIR$/../../src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/test/resources" type="java-test-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="electron-exiles_main" />
+    <orderEntry type="library" name="Gradle: com.googlecode.json-simple:json-simple:1.1" level="project" />
     <orderEntry type="library" name="Gradle: org.mockito:mockito-core:2.23.4" level="project" />
     <orderEntry type="library" name="Gradle: org.mockito:mockito-junit-jupiter:2.18.3" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-core:4.0.15-alpha" level="project" />

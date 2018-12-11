@@ -30,7 +30,7 @@ public class JsonDataLoader implements IDataLoader {
         Iterator<JSONObject> iterator = jsonArray.iterator();
         while (iterator.hasNext()) {
             JSONObject nextObject = iterator.next();
-            dataRowList.addRow(new DataRow((String) nextObject.get("Date"), (nextObject.get("High").toString())));
+            dataRowList.addRow(new DataRow(nextObject.get("Date").toString(), (nextObject.get("High").toString())));
         }
 
         return dataRowList;

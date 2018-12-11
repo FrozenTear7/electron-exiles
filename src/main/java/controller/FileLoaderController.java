@@ -42,12 +42,14 @@ public class FileLoaderController {
         File dogeCsv = new File(classLoader.getResource("doge.csv").getFile());
         File appleCsvMini = new File(classLoader.getResource("aapl_us_d.csv").getFile());
         File appleCsv = new File(classLoader.getResource("aapl_us_d_2016.csv").getFile());
+        File goldCsv = new File(classLoader.getResource("gold.csv").getFile());
         File dogeJson = new File(classLoader.getResource("doge.json").getFile());
         File appleJson = new File(classLoader.getResource("aapl.json").getFile());
 
         historyView.getItems().add(dogeCsv.getAbsolutePath());
         historyView.getItems().add(appleCsvMini.getAbsolutePath());
         historyView.getItems().add(appleCsv.getAbsolutePath());
+        historyView.getItems().add(goldCsv.getAbsolutePath());
         historyView.getItems().add(dogeJson.getAbsolutePath());
         historyView.getItems().add(appleJson.getAbsolutePath());
     }
