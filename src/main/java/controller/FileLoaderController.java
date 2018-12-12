@@ -19,7 +19,6 @@ import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
 public class FileLoaderController {
-    private TableViewController tableViewController;
     private LineChartController lineChartController;
 
     @FXML
@@ -52,10 +51,6 @@ public class FileLoaderController {
         historyView.getItems().add(goldCsv.getAbsolutePath());
         historyView.getItems().add(dogeJson.getAbsolutePath());
         historyView.getItems().add(appleJson.getAbsolutePath());
-    }
-
-    public void setTableViewController(TableViewController tableViewController) {
-        this.tableViewController = tableViewController;
     }
 
     public void setLineChartController(LineChartController lineChartController) {
@@ -109,7 +104,6 @@ public class FileLoaderController {
     }
 
     private void updateViews(DataRowList dataRowList, String filePath) {
-        tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
         lineChartController.setData(dataRowList.getDataRowList());
     }
 
