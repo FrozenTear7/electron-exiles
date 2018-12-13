@@ -49,9 +49,10 @@ public class StrategyController {
 
         strategyListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                ruleListView.setItems(FXCollections.observableArrayList(
-                        strategyList.getStrategy(strategyListView.getSelectionModel().getSelectedIndex()).getRules()
-                ));
+                if (strategyListView.getSelectionModel().getSelectedIndex() != -1)
+                    ruleListView.setItems(FXCollections.observableArrayList(
+                            strategyList.getStrategy(strategyListView.getSelectionModel().getSelectedIndex()).getRules()
+                    ));
             }
         });
     }
