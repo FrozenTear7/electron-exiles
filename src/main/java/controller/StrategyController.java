@@ -9,6 +9,7 @@ import model.Strategy;
 import model.StrategyList;
 
 public class StrategyController {
+
     private StrategyList strategyList = new StrategyList();
 
     @FXML
@@ -75,11 +76,11 @@ public class StrategyController {
 
         strategyListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (strategyListView.getSelectionModel().getSelectedIndex() != -1)
+            if (strategyListView.getSelectionModel().getSelectedIndex() != -1) {
                 ruleListView.setItems(FXCollections.observableArrayList(
-                        strategyList.getStrategy(strategyListView.getSelectionModel().getSelectedIndex()).getRules()
+                        strategyListView.getSelectionModel().getSelectedItem().getRules()
                 ));
-
+            }
         });
 
         strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));
@@ -100,34 +101,51 @@ public class StrategyController {
         String decimalFormatRegex = "(^[1-9]?[0-9](\\.[0-9]*)?$|^$)";
         String integerFormatRegex = "^[0-9]*";
 
-        ruleTextFieldValue.setTextFormatter( new TextFormatter<>(c ->
-        {
+        ruleTextFieldValue.setTextFormatter( new TextFormatter<>(c ->{
+
             if (c.getControlNewText().matches(decimalFormatRegex)){
+
                 return c;
+
             } else {
+
                 return null;
+
             }
+
         }));
 
         ruleTextFieldDays.setTextFormatter(new TextFormatter<>(c ->{
+
             if (c.getControlNewText().matches(integerFormatRegex)){
+
                 return c;
+
             } else {
+
                 return null;
+
             }
+
         }));
 
         strategyTextFieldValue.setTextFormatter(new TextFormatter<>(c ->{
+
             if (c.getControlNewText().matches(decimalFormatRegex)){
+
                 return c;
+
             } else {
+
                 return null;
+
             }
+
         }));
 
     }
 
-    private void resetRuleView(){
+    private void resetRuleViewControls(){
 
         ruleTextFieldDays.clear();
         ruleTextFieldValue.clear();
@@ -137,6 +155,7 @@ public class StrategyController {
     }
 
     private void handleRuleSaveButtonClick(Event event) {
+
         try {
 
             int days = Integer.valueOf(ruleTextFieldDays.getText());
@@ -144,25 +163,30 @@ public class StrategyController {
             float value = Float.valueOf(ruleTextFieldValue.getText());
             if (valueFallRadioButton.isSelected()) value *= -1;
 
-            Strategy selectedStrategy = strategyList.getStrategy(strategyListView.getSelectionModel().getSelectedIndex());
+            if (days == 0 || value == 0){
+                throw new NumberFormatException("Value in text fields cannot be 0");
+            }
+
+            Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
             selectedStrategy.addRule(new Rule(days, value));
 
             ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
 
-            resetRuleView();
+            resetRuleViewControls();
 
-        } catch (ArrayIndexOutOfBoundsException e){
+        } catch (NullPointerException e){
 
             addRuleErrorLabel.setText("Select strategy first to add rule to it");
 
         } catch (NumberFormatException e){
 
-            addRuleErrorLabel.setText("Both text fields cannot be null");
+            addRuleErrorLabel.setText("Invalid values in text fields");
 
         }
+
     }
 
-    private void resetStrategyView(){
+    private void resetStrategyViewControls(){
 
         strategyTextFieldValue.clear();
         buyRadioButton.setSelected(true);
@@ -172,21 +196,27 @@ public class StrategyController {
     }
 
     private void handleAddNewStrategyButtonClick(Event event) {
+
         try {
 
             float percentage = Float.valueOf(strategyTextFieldValue.getText());
             if (sellRadioButton.isSelected()) percentage *= -1;
 
+            if (percentage == 0){
+                throw new NumberFormatException("Value in text fields cannot be 0");
+            }
+
             strategyList.addStrategy(new Strategy(percentage, andRadioButton.isSelected()));
             strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));
 
-            resetStrategyView();
+            resetStrategyViewControls();
 
         } catch (NumberFormatException e){
 
             addStrategyErrorLabel.setText("Invalid buy/sell value");
 
         }
+
     }
 
     private void handleRuleDeleteButtonClick(Event event){

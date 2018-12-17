@@ -28,7 +28,7 @@
 
     <Label layoutX="423.0" layoutY="309.0" text="\%" />
 
-    <Button fx:id="ruleSaveButton" layoutX="397.0" layoutY="333.0" mnemonicParsing="false" text="Add rule" />
+    <Button fx:id="ruleSaveButton" layoutX="398.0" layoutY="333.0" mnemonicParsing="false" text="Add rule" />
 
     <Label layoutX="75.0" layoutY="328.0" text="Value" />
 
@@ -44,8 +44,8 @@
         </placeholder>
     </ListView>
    <Label layoutX="414.0" layoutY="6.0" text="Rules" />
-   <Label fx:id="addStrategyErrorLabel" layoutX="46.0" layoutY="378.0" textFill="RED" />
-   <Label fx:id="addRuleErrorLabel" layoutX="347.0" layoutY="370.0" textAlignment="CENTER" textFill="RED" />
+   <Label fx:id="addStrategyErrorLabel" layoutX="87.0" layoutY="379.0" textFill="RED" />
+   <Label fx:id="addRuleErrorLabel" layoutX="335.0" layoutY="357.0" textAlignment="CENTER" textFill="RED" />
    <Label layoutX="75.0" layoutY="277.0" text="Action" />
    <RadioButton fx:id="buyRadioButton" layoutX="120.0" layoutY="277.0" mnemonicParsing="false" selected="true" text="Buy">
       <toggleGroup>

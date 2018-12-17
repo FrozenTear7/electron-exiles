@@ -25,13 +25,6 @@ public class Strategy {
     }
 
     public List<Rule> getRules() {
-//        List<String> returnList = new ArrayList<>();
-//
-//        for (Rule rule : ruleList) {
-//            returnList.add(rule.toString());
-//        }
-//
-//        return returnList;
         return ruleList;
     }
 
