@@ -24,14 +24,15 @@ public class Strategy {
         ruleList.add(rule);
     }
 
-    public List<String> getRules() {
-        List<String> returnList = new ArrayList<>();
-
-        for (Rule rule : ruleList) {
-            returnList.add(rule.toString());
-        }
-
-        return returnList;
+    public List<Rule> getRules() {
+//        List<String> returnList = new ArrayList<>();
+//
+//        for (Rule rule : ruleList) {
+//            returnList.add(rule.toString());
+//        }
+//
+//        return returnList;
+        return ruleList;
     }
 
     public String toString() {

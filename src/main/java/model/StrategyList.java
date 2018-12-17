@@ -21,13 +21,20 @@ public class StrategyList {
         return strategyList.get(index);
     }
 
-    public List<String> getStrategyList() {
-        List<String> returnList = new ArrayList<>();
+    public List<Strategy> getStrategyList() {
+//        List<String> returnList = new ArrayList<>();
+//
+//        for (Strategy strategy : strategyList) {
+//            returnList.add(strategy.toString());
+//        }
+//
+//        return returnList;
 
-        for (Strategy strategy : strategyList) {
-            returnList.add(strategy.toString());
-        }
-
-        return returnList;
+        return strategyList;
     }
+
+    public void removeStrategy(Strategy strategy){
+        strategyList.remove(strategy);
+    }
+
 }

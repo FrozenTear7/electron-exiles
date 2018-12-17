@@ -12,10 +12,10 @@ public class StrategyController {
     private StrategyList strategyList = new StrategyList();
 
     @FXML
-    private ListView<String> strategyListView = new ListView<>();
+    private ListView<Strategy> strategyListView = new ListView<>();
 
     @FXML
-    private ListView<String> ruleListView = new ListView<>();
+    private ListView<Rule> ruleListView = new ListView<>();
 
     @FXML
     private Label addStrategyErrorLabel;
@@ -191,9 +191,23 @@ public class StrategyController {
 
     private void handleRuleDeleteButtonClick(Event event){
 
+        Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
+        Rule selectedRule = ruleListView.getSelectionModel().getSelectedItem();
+
+        selectedStrategy.getRules().remove(selectedRule);
+
+        ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
+
     }
 
     private void handleStrategyDeleteButtonClick(Event event){
+
+        Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
+
+        strategyList.removeStrategy(selectedStrategy);
+
+        strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));
+        ruleListView.setItems(FXCollections.observableArrayList());
 
     }
 
