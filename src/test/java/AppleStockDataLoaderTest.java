@@ -1,3 +1,4 @@
+/*
 import exceptions.LoadException;
 import model.DataRowList;
 import model.DogeStockDataLoader;
@@ -35,4 +36,4 @@ class AppleStockDataLoaderTest {
             DataRowList dataRowList = dl.getStockData();
         });
     }
-}
+}*/

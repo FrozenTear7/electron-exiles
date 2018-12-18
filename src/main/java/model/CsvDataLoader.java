@@ -14,20 +14,6 @@ public class CsvDataLoader implements IDataLoader {
     public CsvDataLoader() {
     }
 
-    private String getDelimiter(String line) {
-        String delimiter = ",";
-
-        String regexSemicolon = ".*;.*";
-
-        Pattern patternSemicolon = Pattern.compile(regexSemicolon);
-
-        if (patternSemicolon.matcher(line).find()) {
-            delimiter = ";";
-        }
-
-        return delimiter;
-    }
-
     @Override
     public DataRowList getStockData(String csvFile) throws LoadException {
         DataRowList dataRowList = new DataRowList();
@@ -37,23 +23,35 @@ public class CsvDataLoader implements IDataLoader {
             String delimiter = getDelimiter(line);
             List<String> columns = new ArrayList<>(Arrays.asList(line.split(delimiter)));
 
-            if(!columns.contains("Date") || !columns.contains("High")) {
+            if (!columns.contains("Date") || !columns.contains("High")) {
                 throw new LoadException("File must contain Date and High columns!");
             }
 
             while ((line = br.readLine()) != null) {
                 List<String> parsedLine = new ArrayList<>(Arrays.asList(line.split(delimiter)));
-
-                if (parsedLine.size() == columns.size()) {
-                    dataRowList.addRow(new DataRow(parsedLine.get(columns.indexOf("Date")), parsedLine.get(columns.indexOf("High"))));
-                } else {
-                    throw new LoadException("Row columns quantity should be equal!");
-                }
+                dataRowList.addRow(new DataRow(parsedLine.get(columns.indexOf("Date")), parsedLine.get(columns.indexOf("High"))));
             }
         } catch (IOException e) {
             throw new LoadException("Couldn't load file!");
         }
 
         return dataRowList;
+    }
+
+    private String getDelimiter(String line) throws LoadException {
+        String delimiter = "";
+
+        Pattern patternSemicolon = Pattern.compile(".*;.*");
+        Pattern patternComma = Pattern.compile(".*,.*");
+
+        if (patternSemicolon.matcher(line).find()) {
+            delimiter = ";";
+        } else if (patternComma.matcher(line).find()) {
+            delimiter = ",";
+        } else {
+            throw new LoadException("Wrong delimiter. Only ',' and ';' are accepted.");
+        }
+
+        return delimiter;
     }
 }
