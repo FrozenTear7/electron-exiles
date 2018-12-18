@@ -39,7 +39,7 @@ public class CsvDataLoader implements IDataLoader {
     }
 
     private String getDelimiter(String line) throws LoadException {
-        String delimiter = "";
+        String delimiter;
 
         Pattern patternSemicolon = Pattern.compile(".*;.*");
         Pattern patternComma = Pattern.compile(".*,.*");
