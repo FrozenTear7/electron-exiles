@@ -11,13 +11,9 @@ public class Strategy implements IStrategy {
     private StrategyType type;
     private float transactionValue;
 
-    public Strategy(float transactionValue, boolean isChecked) {
+    public Strategy(float transactionValue, StrategyType strategyType) {
         this.transactionValue = transactionValue;
-        if(isChecked) {
-            this.type = StrategyType.STRATEGY_AND;
-        } else {
-            this.type = StrategyType.STRATEGY_OR;
-        }
+        this.type = strategyType;
     }
 
     public void addRule(Rule rule) {

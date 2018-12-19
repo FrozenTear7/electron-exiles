@@ -14,20 +14,20 @@ public class DataRow {
     private Float stockValue;
 
     public DataRow(String date, String stockValue) throws LoadException {
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("MM dd, yyyy");
+        SimpleDateFormat iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat specialDateFormat = new SimpleDateFormat("MM dd, yyyy");
+
+        String regexIso8601DateFormat = "\\d{4}-\\d{2}-\\d{2}";
+        String regexSpecialDateFormat = "\\d{2} \\d{2}, \\d{4}";
+
+        Pattern patternIso8601DateFormat = Pattern.compile(regexIso8601DateFormat);
+        Pattern patternSpecialDateFormat = Pattern.compile(regexSpecialDateFormat);
 
         try {
-            String regexSimpleDateFormat1 = "\\d{4}-\\d{2}-\\d{2}";
-            String regexSimpleDateFormat2 = "\\d{2} \\d{2}, \\d{4}";
-
-            Pattern patternSimpleDateFormat1 = Pattern.compile(regexSimpleDateFormat1);
-            Pattern patternSimpleDateFormat2 = Pattern.compile(regexSimpleDateFormat2);
-
-            if (patternSimpleDateFormat1.matcher(date).find()) {
-                this.date = simpleDateFormat1.parse(date);
-            } else if (patternSimpleDateFormat2.matcher(date).find()) {
-                this.date = simpleDateFormat2.parse(date);
+            if (patternIso8601DateFormat.matcher(date).find()) {
+                this.date = iso8601DateFormat.parse(date);
+            } else if (patternSpecialDateFormat.matcher(date).find()) {
+                this.date = specialDateFormat.parse(date);
             } else {
                 throw new LoadException("Wrong date format");
             }
