@@ -43,12 +43,7 @@ public class CsvDataLoader implements IDataLoader {
 
             while ((line = br.readLine()) != null) {
                 List<String> parsedLine = new ArrayList<>(Arrays.asList(line.split(delimiter)));
-
-                if (parsedLine.size() == columns.size()) {
-                    dataRowList.addRow(new DataRow(parsedLine.get(columns.indexOf("Date")), parsedLine.get(columns.indexOf("High"))));
-                } else {
-                    throw new LoadException("Row columns quantity should be equal!");
-                }
+                dataRowList.addRow(new DataRow(parsedLine.get(columns.indexOf("Date")), parsedLine.get(columns.indexOf("High"))));
             }
         } catch (IOException e) {
             throw new LoadException("Couldn't load file!");
