@@ -23,13 +23,21 @@ public class JsonDataLoader implements IDataLoader {
 
         try {
             jsonArray = (JSONArray) jsonParser.parse(new FileReader(csvFile));
-        } catch (ParseException | IOException e) {
+        } catch (IOException e) {
             throw new LoadException("File not found!");
+        } catch (ParseException e) {
+            throw new LoadException("Wrong JSON file syntax");
         }
 
         Iterator<JSONObject> iterator = jsonArray.iterator();
+
         while (iterator.hasNext()) {
             JSONObject nextObject = iterator.next();
+
+            if (!nextObject.containsKey("Date") || !nextObject.containsKey("High")) {
+                throw new LoadException("Rows must contain Date and High keys!");
+            }
+
             dataRowList.addRow(new DataRow(nextObject.get("Date").toString(), (nextObject.get("High").toString())));
         }
 
