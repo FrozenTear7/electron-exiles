@@ -11,13 +11,9 @@ public class Strategy {
     private StrategyType type;
     private float transactionValue;
 
-    public Strategy(float transactionValue, boolean isChecked) {
+    public Strategy(float transactionValue, StrategyType strategyType) {
         this.transactionValue = transactionValue;
-        if(isChecked) {
-            this.type = StrategyType.STRATEGY_AND;
-        } else {
-            this.type = StrategyType.STRATEGY_OR;
-        }
+        this.type = strategyType;
     }
 
     public void addRule(Rule rule) {
@@ -29,7 +25,7 @@ public class Strategy {
     }
 
     public String toString() {
-        if(transactionValue >= 0) {
+        if (transactionValue >= 0) {
             return "Strategy: buy: " + transactionValue + "% / " + type.toString();
         } else {
             return "Strategy: sell: " + transactionValue + "% / " + type.toString();

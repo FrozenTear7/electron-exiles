@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import model.Rule;
 import model.Strategy;
 import model.StrategyList;
+import model.StrategyType;
 
 public class StrategyController {
 
@@ -171,7 +172,10 @@ public class StrategyController {
                 throw new NumberFormatException("Value in text fields cannot be 0");
             }
 
-            strategyList.addStrategy(new Strategy(percentage, andRadioButton.isSelected()));
+            StrategyType strategyType = andRadioButton.isSelected() ? StrategyType.STRATEGY_AND : StrategyType.STRATEGY_OR;
+            Strategy strategy = new Strategy(percentage, strategyType);
+
+            strategyList.addStrategy(strategy);
             strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));
 
             resetStrategyViewControls();
