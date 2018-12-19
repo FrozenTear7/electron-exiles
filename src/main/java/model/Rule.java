@@ -1,6 +1,9 @@
 package model;
 
-public class Rule {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Rule implements IStrategy {
     private int daysBack;
     private float valueChange;
 
@@ -13,6 +16,43 @@ public class Rule {
 
         this.daysBack = daysBack;
         this.valueChange = valueChange;
+    }
+
+
+
+    public void addRule(Rule rule) {
+    }
+
+    public List<Rule> getRules() {
+        return null;
+    }
+
+    public List<MarketAction> evaluate(List<DataRow> data) {
+        List<MarketAction> result = new ArrayList<>();
+        for(int i = 0; i < data.size(); i++) {
+            if (i < daysBack) {
+                result.add(MarketAction.UNDEF);
+            }
+            else {
+                if (valueChange > 0) {
+                    if (data.get(i).getStockValue() - data.get(i-daysBack).getStockValue() >= valueChange) {
+                        result.add(MarketAction.BUY);
+                    }
+                    else {
+                        result.add(MarketAction.UNDEF);
+                    }
+                }
+                else {
+                    if (data.get(i).getStockValue() - data.get(i-daysBack).getStockValue() <= valueChange) {
+                        result.add(MarketAction.SELL);
+                    }
+                    else {
+                        result.add(MarketAction.UNDEF);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     @Override

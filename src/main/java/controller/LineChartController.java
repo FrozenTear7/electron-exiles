@@ -46,6 +46,7 @@ public class LineChartController {
 
     private int MAX_ZOOM_LVL = 10;
     private int MIN_ZOOM_LVL = 0;
+    private final int maximumNumberOfPoints = 1200;
 
     @FXML
     private void initialize() {
@@ -59,6 +60,7 @@ public class LineChartController {
 
         lineChart.setTitle("stock values");
         lineChart.setCreateSymbols(false);
+        lineChart.setAnimated(false);
 
         handleButtonsClick();
     }
@@ -135,8 +137,14 @@ public class LineChartController {
         series.add(new XYChart.Series<>());
         series.get(0).setName("value");
 
-        for (DataRow row : data) {
-            series.get(0).getData().add(new XYChart.Data<String, Number>(getDateLabel(row.getDate()), row.getStockValue()));
+        int amountOfData = data.size();
+        int omitRate = amountOfData / maximumNumberOfPoints;
+        if (omitRate < 1) omitRate = 1;
+
+        for (int i = 0; i < amountOfData; i++) {
+            if(i % omitRate == 0) {
+                series.get(0).getData().add(new XYChart.Data<String, Number>(getDateLabel(data.get(i).getDate()), data.get(i).getStockValue()));
+            }
         }
 
         return series;
