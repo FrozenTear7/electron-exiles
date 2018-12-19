@@ -8,7 +8,7 @@
 - Testy podstawowej funkcjonalności
 
 ##### Schemat klas stanu obecnego
-![](./ClassDiagram2.png)
+![](./ClassDiagram3.png)
 
 ##### Podstawowa funkcjonalość
 - Model danych akcji
