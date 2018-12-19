@@ -1,6 +1,6 @@
 import controller.FileLoaderController;
 import controller.LineChartController;
-import controller.TableViewController;
+import controller.StrategyController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,9 +20,9 @@ public class App extends Application {
         try {
             BorderPane root = new BorderPane();
 
-            FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("/fxmls/TableView.fxml"));
-            root.setRight(tableViewLoader.load());
-            TableViewController tableViewController = tableViewLoader.getController();
+            FXMLLoader strategyListLoader = new FXMLLoader(getClass().getResource("/fxmls/StrategyList.fxml"));
+            root.setRight(strategyListLoader.load());
+            StrategyController strategyListController = strategyListLoader.getController();
 
             FXMLLoader lineChartLoader = new FXMLLoader(getClass().getResource("/fxmls/LineChart.fxml"));
             root.setBottom(lineChartLoader.load());
@@ -31,7 +31,6 @@ public class App extends Application {
             FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxmls/FileLoader.fxml"));
             root.setLeft(fileLoader.load());
             FileLoaderController fileLoaderController = fileLoader.getController();
-            fileLoaderController.setTableViewController(tableViewController);
             fileLoaderController.setLineChartController(lineChartController);
 
             Scene scene = new Scene(root, 1200, 900);

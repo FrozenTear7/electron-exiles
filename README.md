@@ -23,6 +23,17 @@ Pozwala to na utworzenie standardu i połączenie plików z ich loaderami.
 Wykres posiada podstawowe funkcje przybliżania i oddalania i poruszania się po zakresie czasowym.
 
 #### Etap 2:
+- Poprawa loaderów i labelek dat linechartu z etapu 1
+- Wprowadzenie strategii i zasad
+- UI dla zarządzania strategiami i zasadami
+- Testy dla utworzonej funkcjonalności
+
+##### Strategie
+Strategie zostały utworzone w myśl kompozytu, zawierają listę zasad, typ logiczny łączenia zasad oraz zasady zakupu/sprzedaży.
+GUI pozwala na dodawanie i usuwanie strategii oraz dodawanie i usuwanie zasad związanymi z zaznaczoną na liście strategią.
+Etap 3 rozwinie uruchamianie strategii i symulację przebiegu ich działania.
+
+#### Etap 3:
 TO BE CONTINUED
 <img src="https://ninfora.com/forums/uploads/monthly_2016_12/maxresdefault.jpg.6726da6b26a92e9e10764a43bac729d4.jpg" />
 

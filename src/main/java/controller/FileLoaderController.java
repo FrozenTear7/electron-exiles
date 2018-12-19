@@ -10,23 +10,22 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import model.AppleStockDataLoader;
+import model.CsvDataLoader;
 import model.DataRowList;
-import model.DogeStockDataLoader;
+import model.JsonDataLoader;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
 public class FileLoaderController {
-    private TableViewController tableViewController;
     private LineChartController lineChartController;
 
     @FXML
     private Button openFileButton;
 
     @FXML
-    private ListView historyView;
+    private ListView<String> historyView;
 
     @FXML
     private Text errorInfo;
@@ -42,14 +41,16 @@ public class FileLoaderController {
         File dogeCsv = new File(classLoader.getResource("doge.csv").getFile());
         File appleCsvMini = new File(classLoader.getResource("aapl_us_d.csv").getFile());
         File appleCsv = new File(classLoader.getResource("aapl_us_d_2016.csv").getFile());
+        File goldCsv = new File(classLoader.getResource("gold.csv").getFile());
+        File dogeJson = new File(classLoader.getResource("doge.json").getFile());
+        File appleJson = new File(classLoader.getResource("aapl.json").getFile());
 
         historyView.getItems().add(dogeCsv.getAbsolutePath());
         historyView.getItems().add(appleCsvMini.getAbsolutePath());
         historyView.getItems().add(appleCsv.getAbsolutePath());
-    }
-
-    public void setTableViewController(TableViewController tableViewController) {
-        this.tableViewController = tableViewController;
+        historyView.getItems().add(goldCsv.getAbsolutePath());
+        historyView.getItems().add(dogeJson.getAbsolutePath());
+        historyView.getItems().add(appleJson.getAbsolutePath());
     }
 
     public void setLineChartController(LineChartController lineChartController) {
@@ -57,28 +58,27 @@ public class FileLoaderController {
     }
 
     private DataRowList getDataFromLoader(String filePath) {
-        String dogeRegex = ".*doge\\.csv";
-        String appleRegex = ".*aapl.*\\.csv";
-
-        Pattern dogePattern = Pattern.compile(dogeRegex);
-        Pattern applePattern = Pattern.compile(appleRegex);
+        String csvRegex = ".*\\.csv";
+        String jsonRegex = ".*\\.json";
+        Pattern csvPattern = Pattern.compile(csvRegex);
+        Pattern jsonPattern = Pattern.compile(jsonRegex);
 
         DataRowList dataRowList = null;
 
-        if (dogePattern.matcher(filePath).find()) {
-            DogeStockDataLoader dl = new DogeStockDataLoader(filePath);
+        if (csvPattern.matcher(filePath).find()) {
+            CsvDataLoader dl = new CsvDataLoader();
 
             try {
-                dataRowList = dl.getStockData();
+                dataRowList = dl.getStockData(filePath);
             } catch (LoadException e) {
                 errorInfo.setText(e.getMessage());
                 errorInfo.setFill(Color.RED);
             }
-        } else if (applePattern.matcher(filePath).find()) {
-            AppleStockDataLoader dl = new AppleStockDataLoader(filePath);
+        } else if (jsonPattern.matcher(filePath).find()) {
+            JsonDataLoader dl = new JsonDataLoader();
 
             try {
-                dataRowList = dl.getStockData();
+                dataRowList = dl.getStockData(filePath);
             } catch (LoadException e) {
                 errorInfo.setText(e.getMessage());
                 errorInfo.setFill(Color.RED);
@@ -96,19 +96,19 @@ public class FileLoaderController {
 
         fc.setInitialDirectory(new File(Paths.get("").toAbsolutePath().toString()));
         fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("CSV", "*.csv")
+                new FileChooser.ExtensionFilter("CSV", "*.csv"),
+                new FileChooser.ExtensionFilter("JSON", "*.json")
         );
 
         return fc.showOpenDialog(null);
     }
 
     private void updateViews(DataRowList dataRowList, String filePath) {
-        tableViewController.setDataAndLabel(dataRowList.getDataRowList(), filePath);
         lineChartController.setData(dataRowList.getDataRowList());
     }
 
     private void updateHistory(String filePath) {
-        ObservableList historyItems = historyView.getItems();
+        ObservableList<String> historyItems = historyView.getItems();
         if (!historyItems.contains(filePath)) historyItems.add(filePath);
     }
 
@@ -130,7 +130,7 @@ public class FileLoaderController {
 
     private void handleHistoryClick(MouseEvent event) {
         if (historyView.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
-            String filePath = (String) historyView.getSelectionModel().getSelectedItem();
+            String filePath = historyView.getSelectionModel().getSelectedItem();
 
             DataRowList dataRowList = getDataFromLoader(filePath);
 
