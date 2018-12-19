@@ -25,7 +25,7 @@ public class FileLoaderController {
     private Button openFileButton;
 
     @FXML
-    private ListView historyView;
+    private ListView<String> historyView;
 
     @FXML
     private Text errorInfo;
@@ -108,7 +108,7 @@ public class FileLoaderController {
     }
 
     private void updateHistory(String filePath) {
-        ObservableList historyItems = historyView.getItems();
+        ObservableList<String> historyItems = historyView.getItems();
         if (!historyItems.contains(filePath)) historyItems.add(filePath);
     }
 
@@ -130,7 +130,7 @@ public class FileLoaderController {
 
     private void handleHistoryClick(MouseEvent event) {
         if (historyView.getSelectionModel().getSelectedItem() != null && event.getClickCount() == 2) {
-            String filePath = (String) historyView.getSelectionModel().getSelectedItem();
+            String filePath = historyView.getSelectionModel().getSelectedItem();
 
             DataRowList dataRowList = getDataFromLoader(filePath);
 

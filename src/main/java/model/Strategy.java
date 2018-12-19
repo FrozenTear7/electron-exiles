@@ -11,31 +11,21 @@ public class Strategy {
     private StrategyType type;
     private float transactionValue;
 
-    public Strategy(float transactionValue, boolean isChecked) {
+    public Strategy(float transactionValue, StrategyType strategyType) {
         this.transactionValue = transactionValue;
-        if(isChecked) {
-            this.type = StrategyType.STRATEGY_AND;
-        } else {
-            this.type = StrategyType.STRATEGY_OR;
-        }
+        this.type = strategyType;
     }
 
     public void addRule(Rule rule) {
         ruleList.add(rule);
     }
 
-    public List<String> getRules() {
-        List<String> returnList = new ArrayList<>();
-
-        for (Rule rule : ruleList) {
-            returnList.add(rule.toString());
-        }
-
-        return returnList;
+    public List<Rule> getRules() {
+        return ruleList;
     }
 
     public String toString() {
-        if(transactionValue >= 0) {
+        if (transactionValue >= 0) {
             return "Strategy: buy: " + transactionValue + "% / " + type.toString();
         } else {
             return "Strategy: sell: " + transactionValue + "% / " + type.toString();
