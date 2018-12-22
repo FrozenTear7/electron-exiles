@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>App</OriginalElement>
+  <nodes>
+    <node x="294.0" y="375.0">App</node>
+    <node x="0.0" y="375.0">model.StrategyList</node>
+    <node x="84.5" y="0.0">model.IDataLoader</node>
+    <node x="362.0" y="0.0">model.IStrategy</node>
+    <node x="200.0" y="153.0">controller.TableViewController</node>
+    <node x="165.0" y="301.0">model.StrategyType</node>
+    <node x="151.0" y="79.0">model.CsvDataLoader</node>
+    <node x="0.0" y="227.0">controller.LineChartController</node>
+    <node x="386.0" y="227.0">exceptions.LoadException</node>
+    <node x="197.0" y="227.0">controller.StrategyController</node>
+    <node x="327.0" y="301.0">model.DataRowList</node>
+    <node x="414.0" y="79.0">model.Strategy</node>
+    <node x="323.0" y="79.0">model.Rule</node>
+    <node x="0.0" y="79.0">model.JsonDataLoader</node>
+    <node x="0.0" y="301.0">model.MarketAction</node>
+    <node x="154.0" y="375.0">model.DataRow</node>
+    <node x="0.0" y="153.0">controller.FileLoaderController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.Strategy" target="model.IStrategy">
+      <point x="0.0" y="-14.5" />
+      <point x="459.5" y="54.0" />
+      <point x="432.5" y="54.0" />
+      <point x="23.5" y="14.5" />
+    </edge>
+    <edge source="model.JsonDataLoader" target="model.IDataLoader">
+      <point x="0.0" y="-14.5" />
+      <point x="65.5" y="54.0" />
+      <point x="112.25" y="54.0" />
+      <point x="-27.75" y="14.5" />
+    </edge>
+    <edge source="model.Rule" target="model.IStrategy">
+      <point x="0.0" y="-14.5" />
+      <point x="358.5" y="54.0" />
+      <point x="385.5" y="54.0" />
+      <point x="-23.5" y="14.5" />
+    </edge>
+    <edge source="model.CsvDataLoader" target="model.IDataLoader">
+      <point x="0.0" y="-14.5" />
+      <point x="214.5" y="54.0" />
+      <point x="167.75" y="54.0" />
+      <point x="27.75" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.1263736263736266" x="633.0" y="503.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
