@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class Strategy implements IStrategy {
-    private List<Rule> ruleList = new ArrayList<>();
+    private List<IRule> ruleList = new ArrayList<>();
     private StrategyType type;
     private float transactionValue;
 
@@ -16,11 +16,11 @@ public class Strategy implements IStrategy {
         this.type = strategyType;
     }
 
-    public void addRule(Rule rule) {
+    public void addRule(IRule rule) {
         ruleList.add(rule);
     }
 
-    public List<Rule> getRules() {
+    public List<IRule> getRules() {
         return ruleList;
     }
 
@@ -35,7 +35,7 @@ public class Strategy implements IStrategy {
             defaultAction = MarketAction.UNDEF;
         }
 
-        for(Rule rule : ruleList){
+        for(IRule rule : ruleList){
             partialEvaluations.add(rule.evaluate(data));
         }
 

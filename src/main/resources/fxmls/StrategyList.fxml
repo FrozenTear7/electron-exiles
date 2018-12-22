@@ -60,13 +60,15 @@
       </toggleGroup>
    </RadioButton>
    <RadioButton fx:id="orRadioButton" layoutX="188.0" layoutY="300.0" mnemonicParsing="false" text="OR" toggleGroup="$ruleForm" />
-   <RadioButton fx:id="valueRiseRadioButton" layoutX="441.0" layoutY="309.0" mnemonicParsing="false" selected="true" text="Rise">
+   <RadioButton fx:id="valueRiseRadioButton" layoutX="441.0" layoutY="309.0" mnemonicParsing="false" selected="true" text="Greater">
       <toggleGroup>
          <ToggleGroup fx:id="valueChange" />
       </toggleGroup>
    </RadioButton>
-   <RadioButton fx:id="valueFallRadioButton" layoutX="493.0" layoutY="309.0" mnemonicParsing="false" text="Fall" toggleGroup="$valueChange" />
+   <RadioButton fx:id="valueFallRadioButton" layoutX="510.0" layoutY="309.0" mnemonicParsing="false" text="Less" toggleGroup="$valueChange" />
    <Label layoutX="450.0" layoutY="277.0" text="days" />
    <Button fx:id="strategyDeleteButton" layoutX="272.0" layoutY="30.0" mnemonicParsing="false" text="-" />
-   <Button fx:id="ruleDeleteButton" layoutX="560.0" layoutY="30.0" mnemonicParsing="false" text="-" />
+    <Button fx:id="ruleDeleteButton" layoutX="557.0" layoutY="30.0" mnemonicParsing="false" text="-" />
+    <Button fx:id="ruleMergeOrButton" layoutX="557.0" layoutY="60.0" mnemonicParsing="false" text="OR" />
+    <Button fx:id="ruleMergeAndButton" layoutX="557.0" layoutY="90.0" mnemonicParsing="false" text="AND" />
 </AnchorPane>

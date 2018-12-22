@@ -4,10 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.Rule;
-import model.Strategy;
-import model.StrategyList;
-import model.StrategyType;
+import model.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StrategyController {
 
@@ -17,7 +17,7 @@ public class StrategyController {
     private ListView<Strategy> strategyListView = new ListView<>();
 
     @FXML
-    private ListView<Rule> ruleListView = new ListView<>();
+    private ListView<IRule> ruleListView = new ListView<>();
 
     @FXML
     private Label addStrategyErrorLabel;
@@ -65,7 +65,14 @@ public class StrategyController {
     private Button ruleDeleteButton;
 
     @FXML
+    private Button ruleMergeOrButton;
+
+    @FXML
+    private Button ruleMergeAndButton;
+
+    @FXML
     private void initialize() {
+        ruleListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         setTextFieldFormatters();
         setButtonActionHandlers();
         configureStrategyListView();
@@ -88,6 +95,8 @@ public class StrategyController {
         addStrategyButton.setOnAction(this::handleAddNewStrategyButtonClick);
         ruleDeleteButton.setOnAction(this::handleRuleDeleteButtonClick);
         strategyDeleteButton.setOnAction(this::handleStrategyDeleteButtonClick);
+        ruleMergeOrButton.setOnAction(this::handleRuleMergeOrButton);
+        ruleMergeAndButton.setOnAction(this::handleRuleMergeAndButton);
     }
 
     private void setTextFieldFormatters() {
@@ -140,7 +149,7 @@ public class StrategyController {
             }
 
             Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
-            selectedStrategy.addRule(new Rule(days, value));
+            selectedStrategy.addRule(new RuleBasic(days, value, true));
 
             ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
 
@@ -187,9 +196,10 @@ public class StrategyController {
 
     private void handleRuleDeleteButtonClick(Event event) {
         Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
-        Rule selectedRule = ruleListView.getSelectionModel().getSelectedItem();
 
-        selectedStrategy.getRules().remove(selectedRule);
+        for (IRule rule : ruleListView.getSelectionModel().getSelectedItems()) {
+            selectedStrategy.getRules().remove(rule);
+        }
 
         ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
     }
@@ -201,5 +211,19 @@ public class StrategyController {
 
         strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));
         ruleListView.setItems(FXCollections.observableArrayList());
+    }
+
+    private void handleRuleMergeOrButton(Event event) {
+        Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
+        selectedStrategy.addRule(new RuleOr(ruleListView.getSelectionModel().getSelectedItems()));
+
+        ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
+    }
+
+    private void handleRuleMergeAndButton(Event event) {
+        Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
+        selectedStrategy.addRule(new RuleAnd(ruleListView.getSelectionModel().getSelectedItems()));
+
+        ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
     }
 }

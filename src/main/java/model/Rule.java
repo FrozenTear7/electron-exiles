@@ -18,12 +18,15 @@ public class Rule implements IStrategy {
         this.valueChange = valueChange;
     }
 
+    @Override
+    public void addRule(IRule rule) {
 
+    }
 
     public void addRule(Rule rule) {
     }
 
-    public List<Rule> getRules() {
+    public List<IRule> getRules() {
         return null;
     }
 
