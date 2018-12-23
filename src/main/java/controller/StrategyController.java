@@ -141,11 +141,7 @@ public class StrategyController {
             int days = Integer.valueOf(ruleTextFieldDays.getText());
             float value = Float.valueOf(ruleTextFieldValue.getText());
 
-            if (valueLessRadioButton.isSelected()) {
-                value *= -1;
-            }
-
-            if (days == 0 || value == 0) {
+            if (days == 0) {
                 throw new NumberFormatException("Value in text fields cannot be 0");
             }
 
@@ -182,8 +178,7 @@ public class StrategyController {
                 throw new NumberFormatException("Value in text fields cannot be 0");
             }
 
-            StrategyType strategyType = andRadioButton.isSelected() ? StrategyType.STRATEGY_AND : StrategyType.STRATEGY_OR;
-            Strategy strategy = new Strategy(percentage, strategyType);
+            Strategy strategy = new Strategy(percentage);
 
             strategyList.addStrategy(strategy);
             strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));

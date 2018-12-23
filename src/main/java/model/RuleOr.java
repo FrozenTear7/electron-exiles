@@ -27,11 +27,6 @@ public class RuleOr implements IRule {
     }
 
     @Override
-    public List<MarketAction> evaluate(List<DataRow> data) {
-        return null;
-    }
-
-    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (IRule rule : subRules) {

@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Strategy implements IStrategy {
+public class Strategy {
     private List<IRule> ruleList = new ArrayList<>();
-    private StrategyType type;
     private float transactionValue;
 
-    public Strategy(float transactionValue, StrategyType strategyType) {
+    public Strategy(float transactionValue) {
         this.transactionValue = transactionValue;
-        this.type = strategyType;
     }
 
     public void addRule(IRule rule) {
@@ -24,7 +22,7 @@ public class Strategy implements IStrategy {
         return ruleList;
     }
 
-    public List<MarketAction> evaluate(List<DataRow> data) {
+    /*public List<MarketAction> evaluate(List<DataRow> data) {
         List<MarketAction> result = new ArrayList<>();
         List<List<MarketAction>> partialEvaluations = new ArrayList<>();
         MarketAction defaultAction;
@@ -58,13 +56,13 @@ public class Strategy implements IStrategy {
             result.add(tmp);
         }
         return result;
-    }
+    }*/
 
     public String toString() {
         if(transactionValue >= 0) {
-            return "Buy: " + transactionValue + "% / " + type.toString();
+            return "Buy: " + transactionValue + "%";
         } else {
-            return "Sell: " + transactionValue + "% / " + type.toString();
+            return "Sell: " + transactionValue + "%";
         }
     }
 }

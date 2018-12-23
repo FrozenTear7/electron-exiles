@@ -26,11 +26,6 @@ public class RuleBasic implements IRule {
     }
 
     @Override
-    public List<MarketAction> evaluate(List<DataRow> data) {
-        return null;
-    }
-
-    @Override
     public String toString() {
         if (acceptIfGreater) {
             return "At least " + (100+valueChange) + "% of value " + daysBack + " days ago";
