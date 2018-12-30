@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StrategyController {
+    private List<Strategy> strategyList = new ArrayList<>();
 
-    private StrategyList strategyList = new StrategyList();
+    private List<IRule> ruleList = new ArrayList<>();
 
     @FXML
     private ListView<Strategy> strategyListView = new ListView<>();
@@ -75,19 +76,6 @@ public class StrategyController {
         ruleListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         setTextFieldFormatters();
         setButtonActionHandlers();
-        configureStrategyListView();
-    }
-
-    private void configureStrategyListView() {
-        strategyListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (strategyListView.getSelectionModel().getSelectedIndex() != -1) {
-                ruleListView.setItems(FXCollections.observableArrayList(
-                        strategyListView.getSelectionModel().getSelectedItem().getRules()
-                ));
-            }
-        });
-
-        strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));
     }
 
     private void setButtonActionHandlers() {
@@ -145,15 +133,10 @@ public class StrategyController {
                 throw new NumberFormatException("Value in text fields cannot be 0");
             }
 
-            Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
-            selectedStrategy.addRule(new RuleBasic(days, value, valueGreaterRadioButton.isSelected()));
-
-            ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
+            ruleList.add(new RuleBasic(days, value, valueGreaterRadioButton.isSelected()));
+            ruleListView.setItems(FXCollections.observableArrayList(ruleList));
 
             resetRuleViewControls();
-
-        } catch (NullPointerException e) {
-            addRuleErrorLabel.setText("Select strategy first to add rule to it");
         } catch (NumberFormatException e) {
             addRuleErrorLabel.setText("Invalid values in text fields");
         }
@@ -178,51 +161,44 @@ public class StrategyController {
                 throw new NumberFormatException("Value in text fields cannot be 0");
             }
 
-            Strategy strategy = new Strategy(percentage);
+            if (ruleListView.getSelectionModel().getSelectedItems().size() == 1) {
+                strategyList.add(new Strategy(percentage, ruleListView.getSelectionModel().getSelectedItem()));
+                strategyListView.setItems(FXCollections.observableArrayList(strategyList));
 
-            strategyList.addStrategy(strategy);
-            strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));
-
-            resetStrategyViewControls();
-
+                resetStrategyViewControls();
+            } else {
+                addStrategyErrorLabel.setText("Select one rule too add");
+            }
         } catch (NumberFormatException e) {
             addStrategyErrorLabel.setText("Invalid buy/sell value");
         }
     }
 
     private void handleRuleDeleteButtonClick(Event event) {
-        Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
+        ruleList.removeAll(ruleListView.getSelectionModel().getSelectedItems());
 
-        for (IRule rule : ruleListView.getSelectionModel().getSelectedItems()) {
-            selectedStrategy.getRules().remove(rule);
-        }
-
-        ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
+        ruleListView.setItems(FXCollections.observableArrayList(ruleList));
     }
 
     private void handleStrategyDeleteButtonClick(Event event) {
         Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
 
-        strategyList.removeStrategy(selectedStrategy);
+        strategyList.remove(selectedStrategy);
 
-        strategyListView.setItems(FXCollections.observableArrayList(strategyList.getStrategyList()));
-        ruleListView.setItems(FXCollections.observableArrayList());
+        strategyListView.setItems(FXCollections.observableArrayList(strategyList));
     }
 
     private void handleRuleMergeOrButton(Event event) {
         if (ruleListView.getSelectionModel().getSelectedItems().size() > 1) {
             addRuleErrorLabel.setText("");
-            Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
 
-            List<IRule> ruleList = new ArrayList<>();
+            List<IRule> tmpRuleList = new ArrayList<>();
 
-            for (IRule rule : ruleListView.getSelectionModel().getSelectedItems()) {
-                ruleList.add(rule);
-            }
+            tmpRuleList.addAll(ruleListView.getSelectionModel().getSelectedItems());
 
-            selectedStrategy.addRule(new RuleOr(ruleList));
+            ruleList.add(new RuleOr(tmpRuleList));
 
-            ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
+            ruleListView.setItems(FXCollections.observableArrayList(ruleList));
         } else {
             addRuleErrorLabel.setText("Select at least 2 rules to merge!");
         }
@@ -231,17 +207,14 @@ public class StrategyController {
     private void handleRuleMergeAndButton(Event event) {
         if (ruleListView.getSelectionModel().getSelectedItems().size() > 1) {
             addRuleErrorLabel.setText("");
-            Strategy selectedStrategy = strategyListView.getSelectionModel().getSelectedItem();
 
-            List<IRule> ruleList = new ArrayList<>();
+            List<IRule> tmpRuleList = new ArrayList<>();
 
-            for (IRule rule : ruleListView.getSelectionModel().getSelectedItems()) {
-                ruleList.add(rule);
-            }
+            tmpRuleList.addAll(ruleListView.getSelectionModel().getSelectedItems());
 
-            selectedStrategy.addRule(new RuleAnd(ruleList));
+            ruleList.add(new RuleAnd(tmpRuleList));
 
-            ruleListView.setItems(FXCollections.observableArrayList(selectedStrategy.getRules()));
+            ruleListView.setItems(FXCollections.observableArrayList(ruleList));
         } else {
             addRuleErrorLabel.setText("Select at least 2 rules to merge!");
         }

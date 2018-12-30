@@ -7,19 +7,16 @@ import java.util.List;
 
 @Data
 public class Strategy {
-    private List<IRule> ruleList = new ArrayList<>();
+    private IRule rule;
     private float transactionValue;
 
-    public Strategy(float transactionValue) {
+    public Strategy(float transactionValue, IRule rule) {
         this.transactionValue = transactionValue;
+        this.rule = rule;
     }
 
-    public void addRule(IRule rule) {
-        ruleList.add(rule);
-    }
-
-    public List<IRule> getRules() {
-        return ruleList;
+    public IRule getRule() {
+        return rule;
     }
 
     /*public List<MarketAction> evaluate(List<DataRow> data) {
@@ -59,10 +56,10 @@ public class Strategy {
     }*/
 
     public String toString() {
-        if(transactionValue >= 0) {
-            return "Buy: " + transactionValue + "%";
+        if (transactionValue >= 0) {
+            return "Buy: " + transactionValue + "% " + rule.toString();
         } else {
-            return "Sell: " + transactionValue + "%";
+            return "Sell: " + transactionValue + "% " + rule.toString();
         }
     }
 }
