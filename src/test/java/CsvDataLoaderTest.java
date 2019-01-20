@@ -5,8 +5,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import utils.PathUtils;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class CsvDataLoaderTest {
@@ -23,12 +25,12 @@ class CsvDataLoaderTest {
     static void setUp() {
         csvDataLoader = new CsvDataLoader();
 
-        commaFilePath = Utils.getResourcesPath() + "test/test.csv";
-        semicolonFilePath = Utils.getResourcesPath() + "test/test_semicolon.csv";
-        noDateFilePath = Utils.getResourcesPath() + "test/test_no_date.csv";
-        noHighFilePath = Utils.getResourcesPath() + "test/test_no_high.csv";
-        wrongDelimitersFilePath = Utils.getResourcesPath() + "test/test_wrong_delimiters.csv";
-        nonExistingFilePath = Utils.getResourcesPath() + "test/abcd.csv";
+        commaFilePath = PathUtils.getResourcesPath() + "test/test.csv";
+        semicolonFilePath = PathUtils.getResourcesPath() + "test/test_semicolon.csv";
+        noDateFilePath = PathUtils.getResourcesPath() + "test/test_no_date.csv";
+        noHighFilePath = PathUtils.getResourcesPath() + "test/test_no_high.csv";
+        wrongDelimitersFilePath = PathUtils.getResourcesPath() + "test/test_wrong_delimiters.csv";
+        nonExistingFilePath = PathUtils.getResourcesPath() + "test/abcd.csv";
     }
 
     @Test

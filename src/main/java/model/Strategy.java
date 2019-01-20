@@ -2,13 +2,11 @@ package model;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 public class Strategy {
     private IRule rule;
     private float transactionValue;
+    private Float profit;
 
     public Strategy(float transactionValue, IRule rule) {
         this.transactionValue = transactionValue;
@@ -56,10 +54,9 @@ public class Strategy {
     }*/
 
     public String toString() {
-        if (transactionValue >= 0) {
-            return "Buy: " + transactionValue + "% " + rule.toString();
-        } else {
-            return "Sell: " + transactionValue + "% " + rule.toString();
-        }
+        String profitString = profit == null ? "" : profit.toString() + " | ";
+        String transactionType = transactionValue >= 0 ? "Buy" : "Sell";
+
+        return profitString + transactionType + ": " + transactionValue + "% " + rule.toString();
     }
 }

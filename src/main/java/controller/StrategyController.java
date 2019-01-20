@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.*;
+import utils.SimulationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +49,6 @@ public class StrategyController {
     private RadioButton sellRadioButton;
 
     @FXML
-    private RadioButton andRadioButton;
-
-    @FXML
-    private RadioButton orRadioButton;
-
-    @FXML
     private Button ruleSaveButton = new Button();
 
     @FXML
@@ -72,6 +67,9 @@ public class StrategyController {
     private Button ruleMergeAndButton;
 
     @FXML
+    private Button simulateButton;
+
+    @FXML
     private void initialize() {
         ruleListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         setTextFieldFormatters();
@@ -85,6 +83,7 @@ public class StrategyController {
         strategyDeleteButton.setOnAction(this::handleStrategyDeleteButtonClick);
         ruleMergeOrButton.setOnAction(this::handleRuleMergeOrButton);
         ruleMergeAndButton.setOnAction(this::handleRuleMergeAndButton);
+        simulateButton.setOnAction(this::handleSimulateButton);
     }
 
     private void setTextFieldFormatters() {
@@ -145,7 +144,6 @@ public class StrategyController {
     private void resetStrategyViewControls() {
         strategyTextFieldValue.clear();
         buyRadioButton.setSelected(true);
-        andRadioButton.setSelected(true);
         addStrategyErrorLabel.setText("");
     }
 
@@ -218,5 +216,13 @@ public class StrategyController {
         } else {
             addRuleErrorLabel.setText("Select at least 2 rules to merge!");
         }
+    }
+
+    private void handleSimulateButton(Event event) {
+        for (Strategy strategy : strategyList) {
+            SimulationUtils.simulate(strategy);
+        }
+
+        strategyListView.refresh();
     }
 }

@@ -33,7 +33,7 @@ public class App extends Application {
             FileLoaderController fileLoaderController = fileLoader.getController();
             fileLoaderController.setLineChartController(lineChartController);
 
-            Scene scene = new Scene(root, 1200, 900);
+            Scene scene = new Scene(root, 1400, 900);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

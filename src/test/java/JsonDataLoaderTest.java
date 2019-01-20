@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import utils.PathUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,11 +24,11 @@ class JsonDataLoaderTest {
     static void setUp() {
         jsonDataLoader = new JsonDataLoader();
 
-        correctFilePath = Utils.getResourcesPath() + "test/test.json";
-        noDateFilePath = Utils.getResourcesPath() + "test/test_no_date.json";
-        noHighFilePath = Utils.getResourcesPath() + "test/test_no_high.json";
-        wrongSyntaxFilePath = Utils.getResourcesPath() + "test/test_wrong_syntax.json";
-        nonExistingFilePath = Utils.getResourcesPath() + "test/abcd.json";
+        correctFilePath = PathUtils.getResourcesPath() + "test/test.json";
+        noDateFilePath = PathUtils.getResourcesPath() + "test/test_no_date.json";
+        noHighFilePath = PathUtils.getResourcesPath() + "test/test_no_high.json";
+        wrongSyntaxFilePath = PathUtils.getResourcesPath() + "test/test_wrong_syntax.json";
+        nonExistingFilePath = PathUtils.getResourcesPath() + "test/abcd.json";
     }
 
     @Test

@@ -7,68 +7,69 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StrategyController">
+<AnchorPane prefHeight="400.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StrategyController">
 
-    <Label layoutX="112.0" layoutY="6.0" text="Strategies" />
+    <Label layoutX="471.0" layoutY="23.0" text="Strategies" />
 
-    <ListView fx:id="strategyListView" layoutX="14.0" layoutY="30.0" prefHeight="240.0" prefWidth="250.0">
+    <ListView fx:id="strategyListView" layoutX="373.0" layoutY="47.0" prefHeight="240.0" prefWidth="250.0">
         <placeholder>
             <Label text="No strategies added" />
         </placeholder>
     </ListView>
 
-    <Label layoutX="353.0" layoutY="277.0" text="Period" />
+    <Label layoutX="74.0" layoutY="294.0" text="Period:" />
 
-    <TextField fx:id="ruleTextFieldValue" layoutX="367.0" layoutY="305.0" prefHeight="25.0" prefWidth="53.0" />
+    <TextField fx:id="ruleTextFieldValue" layoutX="95.0" layoutY="322.0" prefHeight="25.0" prefWidth="53.0" />
 
-    <Label layoutX="331.0" layoutY="309.0" text="Value" />
+    <Label layoutX="52.0" layoutY="326.0" text="Value:" />
 
-    <TextField fx:id="ruleTextFieldDays" layoutX="393.0" layoutY="273.0" prefHeight="25.0" prefWidth="53.0" />
+    <TextField fx:id="ruleTextFieldDays" layoutX="121.0" layoutY="290.0" prefHeight="25.0" prefWidth="53.0" />
 
-    <Label layoutX="423.0" layoutY="309.0" text="\%" />
+    <Label layoutX="151.0" layoutY="326.0" text="\%" />
 
-    <Button fx:id="ruleSaveButton" layoutX="398.0" layoutY="333.0" mnemonicParsing="false" text="Add rule" />
+    <Button fx:id="ruleSaveButton" layoutX="124.0" layoutY="361.0" mnemonicParsing="false" text="Add rule" />
 
-    <Label layoutX="75.0" layoutY="328.0" text="Value" />
+    <Label layoutX="433.0" layoutY="326.0" text="Value:" />
 
-    <TextField fx:id="strategyTextFieldValue" layoutX="120.0" layoutY="324.0" prefHeight="25.0" prefWidth="53.0" />
+    <TextField fx:id="strategyTextFieldValue" layoutX="477.0" layoutY="323.0" prefHeight="25.0" prefWidth="53.0" />
 
     <Label layoutX="175.0" layoutY="328.0" text="\%" />
 
-    <Button fx:id="addStrategyButton" layoutX="88.0" layoutY="353.0" mnemonicParsing="false" text="Add new strategy" />
+    <Button fx:id="addStrategyButton" layoutX="435.0" layoutY="361.0" mnemonicParsing="false" text="Add new strategy" />
 
-    <ListView fx:id="ruleListView" layoutX="303.0" layoutY="30.0" prefHeight="240.0" prefWidth="250.0">
+    <ListView fx:id="ruleListView" layoutX="31.0" layoutY="47.0" prefHeight="240.0" prefWidth="250.0">
         <placeholder>
             <Label text="No rules added" />
         </placeholder>
     </ListView>
-   <Label layoutX="414.0" layoutY="6.0" text="Rules" />
+   <Label layoutX="142.0" layoutY="23.0" text="Rules" />
    <Label fx:id="addStrategyErrorLabel" layoutX="87.0" layoutY="379.0" textFill="RED" />
    <Label fx:id="addRuleErrorLabel" layoutX="335.0" layoutY="357.0" textAlignment="CENTER" textFill="RED" />
-   <Label layoutX="75.0" layoutY="277.0" text="Action" />
-   <RadioButton fx:id="buyRadioButton" layoutX="120.0" layoutY="277.0" mnemonicParsing="false" selected="true" text="Buy">
+   <Label layoutX="420.0" layoutY="294.0" text="Action:" />
+   <RadioButton fx:id="buyRadioButton" layoutX="479.0" layoutY="294.0" mnemonicParsing="false" selected="true" text="Buy">
       <toggleGroup>
          <ToggleGroup fx:id="action" />
       </toggleGroup>
    </RadioButton>
-   <RadioButton fx:id="sellRadioButton" layoutX="186.0" layoutY="277.0" mnemonicParsing="false" text="Sell" toggleGroup="$action" />
-   <Label layoutX="59.0" layoutY="300.0" text="Rule form" />
-   <RadioButton fx:id="andRadioButton" layoutX="121.0" layoutY="300.0" mnemonicParsing="false" selected="true" text="AND">
-      <toggleGroup>
-         <ToggleGroup fx:id="ruleForm" />
-      </toggleGroup>
-   </RadioButton>
-   <RadioButton fx:id="orRadioButton" layoutX="188.0" layoutY="300.0" mnemonicParsing="false" text="OR" toggleGroup="$ruleForm" />
-   <RadioButton fx:id="valueGreaterRadioButton" layoutX="441.0" layoutY="309.0" mnemonicParsing="false" selected="true" text="Greater">
+   <RadioButton fx:id="sellRadioButton" layoutX="534.0" layoutY="294.0" mnemonicParsing="false" text="Sell" toggleGroup="$action" />
+   <RadioButton fx:id="valueGreaterRadioButton" layoutX="169.0" layoutY="326.0" mnemonicParsing="false" selected="true" text="Greater">
       <toggleGroup>
          <ToggleGroup fx:id="valueChange" />
       </toggleGroup>
    </RadioButton>
-   <RadioButton fx:id="valueLessRadioButton" layoutX="510.0" layoutY="309.0" mnemonicParsing="false" text="Less" toggleGroup="$valueChange" />
-   <Label layoutX="450.0" layoutY="277.0" text="days" />
-   <Button fx:id="strategyDeleteButton" layoutX="272.0" layoutY="30.0" mnemonicParsing="false" text="-" />
-    <Button fx:id="ruleDeleteButton" layoutX="557.0" layoutY="30.0" mnemonicParsing="false" text="-" />
-    <Button fx:id="ruleMergeOrButton" layoutX="557.0" layoutY="60.0" mnemonicParsing="false" text="OR" />
-    <Button fx:id="ruleMergeAndButton" layoutX="557.0" layoutY="90.0" mnemonicParsing="false" text="AND" />
+   <RadioButton fx:id="valueLessRadioButton" layoutX="251.0" layoutY="326.0" mnemonicParsing="false" text="Less" toggleGroup="$valueChange" />
+   <Label layoutX="179.0" layoutY="294.0" text="days" />
+   <Button fx:id="strategyDeleteButton" layoutX="630.0" layoutY="47.0" mnemonicParsing="false" text="-" />
+    <Button fx:id="ruleDeleteButton" layoutX="285.0" layoutY="47.0" mnemonicParsing="false" text="-" />
+    <Button fx:id="ruleMergeOrButton" layoutX="286.0" layoutY="154.0" mnemonicParsing="false" text="OR" />
+    <Button fx:id="ruleMergeAndButton" layoutX="287.0" layoutY="187.0" mnemonicParsing="false" text="AND" />
+   <Label layoutX="284.0" layoutY="100.0" prefHeight="62.0" prefWidth="40.0" text="Merge with:" wrapText="true" />
+   <Button fx:id="simulateButton" layoutX="666.0" layoutY="145.0" mnemonicParsing="false" text="Simulate!">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Button>
+   <Label layoutX="537.0" layoutY="326.0" text="\%" />
 </AnchorPane>
