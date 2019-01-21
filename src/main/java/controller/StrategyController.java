@@ -15,11 +15,16 @@ public class StrategyController {
 
     private List<IRule> ruleList = new ArrayList<>();
 
+    private List<Object> simulationResultList = new ArrayList<>();
+
     @FXML
     private ListView<Strategy> strategyListView = new ListView<>();
 
     @FXML
     private ListView<IRule> ruleListView = new ListView<>();
+
+    @FXML
+    private ListView<Object> simulationResultListView = new ListView<>();
 
     @FXML
     private Label addStrategyErrorLabel;
@@ -219,10 +224,11 @@ public class StrategyController {
     }
 
     private void handleSimulateButton(Event event) {
-        for (Strategy strategy : strategyList) {
-            SimulationUtils.simulate(strategy);
-        }
+        Object res = SimulationUtils.simulate(strategyList);
 
-        strategyListView.refresh();
+        simulationResultList.add(res);
+        simulationResultListView.setItems(FXCollections.observableArrayList(simulationResultList));
+
+        simulationResultListView.refresh();
     }
 }
