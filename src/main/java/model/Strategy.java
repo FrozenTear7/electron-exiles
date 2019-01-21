@@ -6,7 +6,6 @@ import lombok.Data;
 public class Strategy {
     private IRule rule;
     private float transactionValue;
-    private Float profit;
 
     public Strategy(float transactionValue, IRule rule) {
         this.transactionValue = transactionValue;
@@ -54,9 +53,8 @@ public class Strategy {
     }*/
 
     public String toString() {
-        String profitString = profit == null ? "" : profit.toString() + " | ";
         String transactionType = transactionValue >= 0 ? "Buy" : "Sell";
 
-        return profitString + transactionType + ": " + transactionValue + "% " + rule.toString();
+        return transactionType + ": " + transactionValue + "% " + rule.toString();
     }
 }
