@@ -15,42 +15,9 @@ public class Strategy {
     public IRule getRule() {
         return rule;
     }
-
-    /*public List<MarketAction> evaluate(List<DataRow> data) {
-        List<MarketAction> result = new ArrayList<>();
-        List<List<MarketAction>> partialEvaluations = new ArrayList<>();
-        MarketAction defaultAction;
-        if (type == StrategyType.STRATEGY_AND) {
-            defaultAction = transactionValue > 0 ? MarketAction.BUY : MarketAction.SELL;
-        }
-        else {
-            defaultAction = MarketAction.UNDEF;
-        }
-
-        for(IRule rule : ruleList){
-            partialEvaluations.add(rule.evaluate(data));
-        }
-
-        for(int i = 0; i < data.size(); i++) {
-            MarketAction tmp = defaultAction;
-            for(int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
-                if(type == StrategyType.STRATEGY_AND) {
-                    if(partialEvaluations.get(ruleIndex).get(i) != defaultAction) {
-                        tmp = MarketAction.UNDEF;
-                        break;
-                    }
-                }
-                else {
-                    if(partialEvaluations.get(ruleIndex).get(i) != MarketAction.UNDEF) {
-                        tmp = defaultAction;
-                        break;
-                    }
-                }
-            }
-            result.add(tmp);
-        }
-        return result;
-    }*/
+    public float getTransactionValue() {
+        return transactionValue;
+    }
 
     public String toString() {
         String transactionType = transactionValue >= 0 ? "Buy" : "Sell";

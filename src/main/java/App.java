@@ -28,6 +28,8 @@ public class App extends Application {
             root.setBottom(lineChartLoader.load());
             LineChartController lineChartController = lineChartLoader.getController();
 
+            strategyListController.setLineChartController(lineChartController);
+
             FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxmls/FileLoader.fxml"));
             root.setLeft(fileLoader.load());
             FileLoaderController fileLoaderController = fileLoader.getController();

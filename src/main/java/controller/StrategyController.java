@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StrategyController {
+    private LineChartController lineChartController;
+
     private List<Strategy> strategyList = new ArrayList<>();
 
     private List<IRule> ruleList = new ArrayList<>();
@@ -224,11 +226,15 @@ public class StrategyController {
     }
 
     private void handleSimulateButton(Event event) {
-        Object res = SimulationUtils.simulate(strategyList);
+        Object res = SimulationUtils.simulate(strategyList, lineChartController.getZoomedData());
 
         simulationResultList.add(res);
         simulationResultListView.setItems(FXCollections.observableArrayList(simulationResultList));
 
         simulationResultListView.refresh();
+    }
+
+    public void setLineChartController(LineChartController lineChartController) {
+        this.lineChartController = lineChartController;
     }
 }

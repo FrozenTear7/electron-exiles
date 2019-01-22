@@ -116,7 +116,7 @@ public class LineChartController {
         lineChart.getData().add(series.get(0));
     }
 
-    private List<DataRow> getZoomedData() {
+    public List<DataRow> getZoomedData() {
         return new ArrayList<>(data.subList(calculateNewRanges().getKey(), calculateNewRanges().getValue()));
     }
 
