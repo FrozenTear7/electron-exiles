@@ -35,6 +35,9 @@ public class StrategyController {
     private Label addRuleErrorLabel;
 
     @FXML
+    private Label simulationErrorLabel;
+
+    @FXML
     private TextField ruleTextFieldDays = new TextField();
 
     @FXML
@@ -79,6 +82,7 @@ public class StrategyController {
     @FXML
     private void initialize() {
         ruleListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        strategyListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         setTextFieldFormatters();
         setButtonActionHandlers();
     }
@@ -226,12 +230,21 @@ public class StrategyController {
     }
 
     private void handleSimulateButton(Event event) {
-        Object res = SimulationUtils.simulate(strategyList, lineChartController.getZoomedData());
+        if (strategyListView.getSelectionModel().getSelectedItems().size() > 0) {
+            simulationErrorLabel.setText("");
 
-        simulationResultList.add(res);
-        simulationResultListView.setItems(FXCollections.observableArrayList(simulationResultList));
+            List<Strategy> selectedStrategies = new ArrayList<>();
+            selectedStrategies.addAll(strategyListView.getSelectionModel().getSelectedItems());
 
-        simulationResultListView.refresh();
+            Object res = SimulationUtils.simulate(selectedStrategies, lineChartController.getZoomedData());
+
+            simulationResultList.add(res);
+            simulationResultListView.setItems(FXCollections.observableArrayList(simulationResultList));
+
+            simulationResultListView.refresh();
+        } else {
+            simulationErrorLabel.setText("Select at least 1 strategy to simulate!");
+        }
     }
 
     public void setLineChartController(LineChartController lineChartController) {

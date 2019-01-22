@@ -78,4 +78,5 @@
            </placeholder>
    </ListView>
    <Label layoutX="694.0" layoutY="23.0" text="Simulation History" />
+   <Label fx:id="simulationErrorLabel" layoutX="639.0" layoutY="341.0" textFill="RED" />
 </AnchorPane>
