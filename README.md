@@ -33,10 +33,6 @@ Strategie zostały utworzone w myśl kompozytu, zawierają listę zasad, typ log
 GUI pozwala na dodawanie i usuwanie strategii oraz dodawanie i usuwanie zasad związanymi z zaznaczoną na liście strategią.
 Etap 3 rozwinie uruchamianie strategii i symulację przebiegu ich działania.
 
-#### Etap 3:
-TO BE CONTINUED
-<img src="https://ninfora.com/forums/uploads/monthly_2016_12/maxresdefault.jpg.6726da6b26a92e9e10764a43bac729d4.jpg" />
-
 #### Authors
 - Filip Duczymiński
 - Wojciech Klemens
